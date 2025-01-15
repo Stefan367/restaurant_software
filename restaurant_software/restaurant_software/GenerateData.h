@@ -21,11 +21,12 @@
 using namespace std;
 
 #include "Structures.h"
-#include "HelperFunctions.h"
+//#include "HelperFunctions.h"
+#include "ValidateData.h"
 
 vector<FoodItem> menu;
 vector<Storage> storage;
-
+vector<Order> orders;
 
 void createFilesIfNotGeneratedYet() {
     vector<string> filenames = {
@@ -54,7 +55,7 @@ void parseMenuLine(const string& line)
 {
     vector<string> lineParts = splitString(line, ';');
 
-    if (lineParts.size() != 3)
+    if (lineParts.size() != MENU_ITEM_FEATURES_COUNT)
     {
         cout << "Invalid line format: " << line << endl;
         return;
@@ -64,7 +65,8 @@ void parseMenuLine(const string& line)
     string ingridients = lineParts[1];
     double price = stringToDouble(lineParts[2]);
 
-    if (price < 0.0) return;
+    if (!isNameValid(foodName)) return;
+    if (!isDoublePositive(price)) return;
 
     // Parse ingridients
     vector<Ingridients> ingridientsList;
@@ -73,6 +75,7 @@ void parseMenuLine(const string& line)
     for (size_t i = 0; i < ingridientParts.size(); i++)
     {
         string currIngridient = ingridientParts[i];
+
         vector<string> currIngridientParts = splitString(currIngridient, '-');
         if (currIngridientParts.size() != 2)
         {
@@ -80,14 +83,15 @@ void parseMenuLine(const string& line)
             return;
         }
 
-        Ingridients ing;
-        ing.name = currIngridientParts[0];
-        ing.quantity = stringToInt(currIngridientParts[1]);
+        string ingName = currIngridientParts[0];;
+        int quantity = stringToInt(currIngridientParts[1]);
 
-        if (ing.quantity < 0)
-        {
-            return;
-        }
+        if (!isNameValid(ingName)) return;
+        if (!isIntPositive(quantity)) return;
+
+        Ingridients ing;
+        ing.name = ingName;
+        ing.quantity = quantity;
 
         ingridientsList.push_back(ing);
     }
@@ -102,7 +106,7 @@ void parseStorageLine(const string& line)
 {
     vector<string> lineParts = splitString(line, ' ');
 
-    if (lineParts.size() != 2)
+    if (lineParts.size() != STORAGE_PRODUCT_FEATURES_COUNT)
     {
         cout << "Invalid line format: " << line << endl;
         return;
@@ -111,10 +115,8 @@ void parseStorageLine(const string& line)
     string productName = lineParts[0];
     int availableQuantity = stringToInt(lineParts[1]);
 
-    if (availableQuantity < 0)
-    {
-        return;
-    }
+    if (!isNameValid(productName)) return;
+    if (!isIntPositive(availableQuantity)) return;
 
     Storage currProduct;
     currProduct.product = productName;
@@ -122,7 +124,32 @@ void parseStorageLine(const string& line)
     storage.push_back(currProduct);
 }
 
-// Function to read data from menu.txt
+void parseOrderLine(const string& line)
+{
+    vector<string> lineParts = splitString(line, '=');
+
+    if (lineParts.size() != ORDERS_FEATURES_COUNT)
+    {
+        cout << "Invalid line format: " << line << endl;
+        return;
+    }
+
+    string productName = lineParts[0];
+    string date = lineParts[1];
+
+    if (!isNameValid(productName)) return;
+    if (!isValidDate(date))
+    {
+        cout << "Invalid date format: " << date << endl;
+    }
+
+    Order order;
+    order.productName = productName;
+    order.date = date;
+    orders.push_back(order);
+}
+
+// Function to read data from all text files
 void readDataFromFile(string filename)
 {
     ifstream file(filename);
@@ -135,6 +162,7 @@ void readDataFromFile(string filename)
     unsigned int fileToReadFrom = 0;
     if (filename == "menu.txt") fileToReadFrom = 1;
     else if (filename == "storage.txt") fileToReadFrom = 2;
+    else if (filename == "orders.txt") fileToReadFrom = 3;
 
     string line;
     while (getline(file, line))
@@ -150,6 +178,7 @@ void readDataFromFile(string filename)
             break;
 
         case 3:
+            parseOrderLine(line);
             break;
 
         case 4:
@@ -168,6 +197,7 @@ void generateData()
     createFilesIfNotGeneratedYet();
     readDataFromFile("menu.txt");
     readDataFromFile("storage.txt");
+    readDataFromFile("orders.txt");
 }
 
 #endif

@@ -27,4 +27,8 @@ const int VALID_CHOICES_MANAGER[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
 const unsigned int NUMBER_OF_VALID_CHOICES_FOR_MANAGER = 14;
 unsigned int currentChoice = 0;
 
+const int MENU_ITEM_FEATURES_COUNT = 3;
+const int STORAGE_PRODUCT_FEATURES_COUNT = 2;
+const int ORDERS_FEATURES_COUNT = 2;
+
 #endif

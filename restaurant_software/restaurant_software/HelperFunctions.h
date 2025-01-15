@@ -29,6 +29,26 @@ bool doesElementContainsInAnArray(unsigned int element, const int arr[], const u
 	return false;
 }
 
+
+bool isDigit(const char ch)
+{
+	return (ch >= '0' && ch <= '9') ? true : false;
+}
+
+bool isLetter(const char ch)
+{
+	return ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) ? true : false;
+}
+
+bool isNumber(const string& str)
+{
+	for (size_t i = 0; i < str.size(); ++i)
+	{
+		if (!isDigit(str[i])) return false;
+	}
+	return true;
+}
+
 int charToInt(const char ch)
 {
 	if (ch >= '0' && ch <= '9') return ch - '0';
@@ -167,70 +187,16 @@ vector<string> splitString(const string& str, char delimiter)
 	return result;
 }
 
-
-bool isDigit(const char ch)
-{
-	return (ch >= '0' && ch <= '9') ? 1 : 0;
-}
-
-bool isLeapYear(int year)
-{
-	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-}
-
-bool isNumber(const string& str)
+bool containsNumbers(const string& str)
 {
 	for (size_t i = 0; i < str.size(); ++i)
 	{
-		if (!isDigit(str[i])) return false;
+		if (isDigit(str[i]))
+		{
+			return true;
+		}
 	}
-	return true;
-}
-
-bool isValidDate(const string& date)
-{
-	// valid date: 01-01-2025
-
-	if (date.length() != 10) {
-		return false;
-	}
-
-	if (date[2] != '-' || date[5] != '-') {
-		return false;
-	}
-
-	string dayStr = date.substr(0, 2);
-	string monthStr = date.substr(3, 2);
-	string yearStr = date.substr(6, 4);
-
-	// Validate that day, month, year are numeric
-	if (!isNumber(dayStr) || !isNumber(monthStr) || !isNumber(yearStr))
-	{
-		return false;
-	}
-
-	int day = stringToInt(dayStr);
-	int month = stringToInt(monthStr);
-	int year = stringToInt(yearStr);
-
-	if (month < 1 || month > 12) {
-		return false;
-	}
-
-	// Days in each month
-	vector<int> daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-	if (month == 2 && isLeapYear(year))
-	{
-		daysInMonth[1] = 29;
-	}
-
-	if (day < 1 || day > daysInMonth[month - 1])
-	{
-		return false;
-	}
-
-	return true;
+	return false;
 }
 
 #endif
