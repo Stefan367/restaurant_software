@@ -8,15 +8,17 @@
 #include <string>
 using namespace std;
 
-#include "HelperFunctions.h"
-#include "Constants.h"
+//#include "HelperFunctions.h"
+//#include "Constants.h"
 #include "UserMenu.h"
+#include "MainFunctions.h"
 
 void completeOption(unsigned int choice)
 {
 	switch (choice)
 	{
 	case 1:
+		printMenu();
 		break;
 
 	case 2:
@@ -67,6 +69,7 @@ void completeOption(unsigned int choice)
 
 void runApplication()
 {
+	generateData();
 	chooseRole();
 
 	while (true)

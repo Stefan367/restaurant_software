@@ -131,7 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="GenerateData.h" />
     <ClInclude Include="HelperFunctions.h" />
+    <ClInclude Include="MainFunctions.h" />
+    <ClInclude Include="Structures.h" />
     <ClInclude Include="UserMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
