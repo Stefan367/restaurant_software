@@ -30,5 +30,6 @@ unsigned int currentChoice = 0;
 const int MENU_ITEM_FEATURES_COUNT = 3;
 const int STORAGE_PRODUCT_FEATURES_COUNT = 2;
 const int ORDERS_FEATURES_COUNT = 2;
+const int DAILY_REPORTS_FEATURES_COUNT = 2;
 
 #endif

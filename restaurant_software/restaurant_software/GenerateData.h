@@ -27,6 +27,7 @@ using namespace std;
 vector<FoodItem> menu;
 vector<Storage> storage;
 vector<Order> orders;
+vector<DailyReport> dailyReports;
 
 void createFilesIfNotGeneratedYet() {
     vector<string> filenames = {
@@ -149,6 +150,33 @@ void parseOrderLine(const string& line)
     orders.push_back(order);
 }
 
+void parseDailyReportLine(const string& line)
+{
+    vector<string> lineParts = splitString(line, '=');
+
+    if (lineParts.size() != DAILY_REPORTS_FEATURES_COUNT)
+    {
+        cout << "Invalid line format: " << line << endl;
+        return;
+    }
+
+    string date = lineParts[0];
+    double totalAmount = stringToDouble(lineParts[1]);
+
+    if (!isValidDate(date))
+    {
+        cout << "Invalid date format: " << date << endl;
+        return;
+    }
+    if (!isDoublePositive(totalAmount)) return;
+
+    DailyReport dailyReport;
+    dailyReport.date = date;
+    dailyReport.totalAmount = totalAmount;
+    dailyReports.push_back(dailyReport);
+}
+
+
 // Function to read data from all text files
 void readDataFromFile(string filename)
 {
@@ -163,6 +191,7 @@ void readDataFromFile(string filename)
     if (filename == "menu.txt") fileToReadFrom = 1;
     else if (filename == "storage.txt") fileToReadFrom = 2;
     else if (filename == "orders.txt") fileToReadFrom = 3;
+    else if (filename == "dailyReports.txt") fileToReadFrom = 4;
 
     string line;
     while (getline(file, line))
@@ -182,6 +211,7 @@ void readDataFromFile(string filename)
             break;
 
         case 4:
+            parseDailyReportLine(line);
             break;
         default:
             break;
@@ -198,6 +228,7 @@ void generateData()
     readDataFromFile("menu.txt");
     readDataFromFile("storage.txt");
     readDataFromFile("orders.txt");
+    readDataFromFile("dailyReports.txt");
 }
 
 #endif
