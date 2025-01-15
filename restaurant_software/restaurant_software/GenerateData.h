@@ -24,6 +24,7 @@ using namespace std;
 #include "HelperFunctions.h"
 
 vector<FoodItem> menu;
+vector<Storage> storage;
 
 
 void createFilesIfNotGeneratedYet() {
@@ -97,6 +98,30 @@ void parseMenuLine(const string& line)
     menu.push_back(foodItem);
 }
 
+void parseStorageLine(const string& line)
+{
+    vector<string> lineParts = splitString(line, ' ');
+
+    if (lineParts.size() != 2)
+    {
+        cout << "Invalid line format: " << line << endl;
+        return;
+    }
+
+    string productName = lineParts[0];
+    int availableQuantity = stringToInt(lineParts[1]);
+
+    if (availableQuantity < 0)
+    {
+        return;
+    }
+
+    Storage currProduct;
+    currProduct.product = productName;
+    currProduct.availableQuantity = availableQuantity;
+    storage.push_back(currProduct);
+}
+
 // Function to read data from menu.txt
 void readDataFromFile(string filename)
 {
@@ -109,6 +134,7 @@ void readDataFromFile(string filename)
 
     unsigned int fileToReadFrom = 0;
     if (filename == "menu.txt") fileToReadFrom = 1;
+    else if (filename == "storage.txt") fileToReadFrom = 2;
 
     string line;
     while (getline(file, line))
@@ -120,6 +146,7 @@ void readDataFromFile(string filename)
             break;
 
         case 2:
+            parseStorageLine(line);
             break;
 
         case 3:
@@ -140,6 +167,7 @@ void generateData()
 {
     createFilesIfNotGeneratedYet();
     readDataFromFile("menu.txt");
+    readDataFromFile("storage.txt");
 }
 
 #endif

@@ -1,0 +1,6 @@
+tomatoes 10000
+cucumbers 10000
+dough 15000
+cheese 5000
+pepperone 3000
+onion 5000
