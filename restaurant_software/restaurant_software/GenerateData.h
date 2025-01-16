@@ -34,16 +34,10 @@ vector<DailyReport> dailyReports;
 // Functions that read the data from the files when the program starts running
 
 void createFilesIfNotGeneratedYet() {
-    vector<string> filenames = {
-        "menu.txt",
-        "orders.txt",
-        "storage.txt",
-        "dailyReports.txt"
-    };
 
-    for (size_t i = 0; i < filenames.size(); ++i) {
+    for (size_t i = 0; i < FILENAMES.size(); ++i) {
 
-        string filename = filenames[i];
+        string filename = FILENAMES[i];
         ofstream file(filename, ios::app);
 
         if (!file)
@@ -192,10 +186,10 @@ void readDataFromFile(string filename)
     }
 
     unsigned int fileToReadFrom = 0;
-    if (filename == "menu.txt") fileToReadFrom = 1;
-    else if (filename == "storage.txt") fileToReadFrom = 2;
-    else if (filename == "orders.txt") fileToReadFrom = 3;
-    else if (filename == "dailyReports.txt") fileToReadFrom = 4;
+    if (filename == MENU_FILE_NAME) fileToReadFrom = 1;
+    else if (filename == STORAGE_FILE_NAME) fileToReadFrom = 2;
+    else if (filename == ORDERS_FILE_NAME) fileToReadFrom = 3;
+    else if (filename == DAILY_REPORTS_FILE_NAME) fileToReadFrom = 4;
 
     string line;
     while (getline(file, line))
@@ -263,58 +257,62 @@ string structureDataForMenuFile(FoodItem food)
     return currLine;
 }
 
-void saveDataToFile(const string& filename)
+void saveTheDataInTheMenuFile(ofstream& file)
 {
-    ofstream file(filename);
-
-    if (!file)
+    string currMenuLine = "";
+    FoodItem currFood;
+    for (size_t i = 0; i < menu.size(); i++)
     {
-        cout << "Error: Could not open file " << filename << " for writing." << endl;
-        return;
+        currFood = menu[i];
+        currMenuLine = structureDataForMenuFile(currFood);
+        file << currMenuLine << "\n";
     }
-
-    if (filename == "menu.txt")
-    {
-        string currMenuLine = "";
-        FoodItem currFood;
-        for (size_t i = 0; i < menu.size(); i++)
-        {
-            currFood = menu[i];
-            currMenuLine = structureDataForMenuFile(currFood);
-            file << currMenuLine << "\n";
-        }
-    }
-    else if (filename == "storage.txt")
-    {
-
-    }
-    else if (filename == "orders.txt")
-    {
-
-    }
-    else if (filename == "dailyReports.txt")
-    {
-
-    }
-
-    file.close();
-    cout << "File saved successfully: " << filename << endl;
 }
-
-
 
 void generateData()
 {
     createFilesIfNotGeneratedYet();
-    readDataFromFile("menu.txt");
-    readDataFromFile("storage.txt");
-    readDataFromFile("orders.txt");
-    readDataFromFile("dailyReports.txt");
+    readDataFromFile(MENU_FILE_NAME);
+    readDataFromFile(STORAGE_FILE_NAME);
+    readDataFromFile(ORDERS_FILE_NAME);
+    readDataFromFile(DAILY_REPORTS_FILE_NAME);
 }
 
-void saveData()
+void saveDataToAllFiles()
 {
-    saveDataToFile("menu.txt");
+    string filename = "";
+
+    for (size_t i = 0; i < FILENAMES.size(); i++)
+    {
+        filename = FILENAMES[i];
+        ofstream file(filename);
+
+        if (!file)
+        {
+            cout << "Error: Could not open file " << filename << " for writing." << endl;
+            return;
+        }
+
+        if (filename == MENU_FILE_NAME)
+        {
+            saveTheDataInTheMenuFile(file);
+        }
+        else if (filename == STORAGE_FILE_NAME)
+        {
+
+        }
+        else if (filename == ORDERS_FILE_NAME)
+        {
+
+        }
+        else if (filename == DAILY_REPORTS_FILE_NAME)
+        {
+
+        }
+
+        file.close();
+        cout << "File saved successfully: " << filename << endl;
+    }
 }
 
 

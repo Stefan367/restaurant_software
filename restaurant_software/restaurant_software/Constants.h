@@ -32,4 +32,16 @@ const int STORAGE_PRODUCT_FEATURES_COUNT = 2;
 const int ORDERS_FEATURES_COUNT = 2;
 const int DAILY_REPORTS_FEATURES_COUNT = 2;
 
+const string MENU_FILE_NAME = "menu.txt";
+const string STORAGE_FILE_NAME = "storage.txt";
+const string ORDERS_FILE_NAME = "orders.txt";
+const string DAILY_REPORTS_FILE_NAME = "dailyReports.txt";
+
+const vector<string> FILENAMES = {
+    MENU_FILE_NAME,
+    ORDERS_FILE_NAME,
+    STORAGE_FILE_NAME,
+    DAILY_REPORTS_FILE_NAME
+};
+
 #endif

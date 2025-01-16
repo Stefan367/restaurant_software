@@ -39,7 +39,7 @@ void completeOption(unsigned int choice)
 	case 7:
 		if (!userRole)
 		{
-			saveData();
+			saveDataToAllFiles();
 			exit(0);
 		}
 		break;
@@ -63,7 +63,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 14:
-		saveData();
+		saveDataToAllFiles();
 		exit(0);
 		break;
 
