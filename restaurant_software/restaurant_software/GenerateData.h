@@ -221,6 +221,20 @@ void readDataFromFile(string filename)
     file.close();
 }
 
+void addFirstWorkDay()
+{
+    if (!dailyReports.size())
+    {
+        const string firstWorkDay = "01-01-2025";
+        double dailySales = 0.0;
+
+        DailyReport firstDailyReport;
+        firstDailyReport.date = firstWorkDay;
+        firstDailyReport.totalAmount = dailySales;
+        dailyReports.push_back(firstDailyReport);
+    }
+}
+
 
 void generateData()
 {
