@@ -325,6 +325,33 @@ void saveTheDataInTheOrdersFile(ofstream& file)
     }
 }
 
+// Create the line with the right format for the dailyReports.txt file
+string structureDataForDailyReportsFile(DailyReport dailyReport)
+{
+    string currLine = "";
+    string date = dailyReport.date;
+    double totalSales = dailyReport.totalAmount;
+
+    if (!isValidDate(date)) return "";
+    if (!isDoublePositive(totalSales)) return "";
+
+    currLine += date + "=" + to_string(totalSales);
+
+    return currLine;
+}
+
+void saveTheDataInTheDailyReportsFile(ofstream& file)
+{
+    string currDailyReportLine = "";
+    DailyReport currDailyReport;
+    for (size_t i = 0; i < dailyReports.size(); i++)
+    {
+        currDailyReport = dailyReports[i];
+        currDailyReportLine = structureDataForDailyReportsFile(currDailyReport);
+        file << currDailyReportLine << "\n";
+    }
+}
+
 void generateData()
 {
     createFilesIfNotGeneratedYet();
@@ -332,6 +359,8 @@ void generateData()
     readDataFromFile(STORAGE_FILE_NAME);
     readDataFromFile(ORDERS_FILE_NAME);
     readDataFromFile(DAILY_REPORTS_FILE_NAME);
+
+    addFirstWorkDay();
 }
 
 void saveDataToAllFiles()
@@ -363,7 +392,7 @@ void saveDataToAllFiles()
         }
         else if (filename == DAILY_REPORTS_FILE_NAME)
         {
-
+            saveTheDataInTheDailyReportsFile(file);
         }
 
         file.close();
