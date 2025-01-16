@@ -103,7 +103,7 @@ void parseMenuLine(const string& line)
 
 void parseStorageLine(const string& line)
 {
-    vector<string> lineParts = splitString(line, ' ');
+    vector<string> lineParts = splitString(line, '-');
 
     if (lineParts.size() != STORAGE_PRODUCT_FEATURES_COUNT)
     {
@@ -236,6 +236,8 @@ void addFirstWorkDay()
 
 // Functions that save the updated data in the files
 
+
+// Create the line with the right format for the menu.txt file
 string structureDataForMenuFile(FoodItem food)
 {
     string currLine = "";
@@ -269,6 +271,60 @@ void saveTheDataInTheMenuFile(ofstream& file)
     }
 }
 
+// Create the line with the right format for the storage.txt file
+string structureDataForStorageFile(Storage product)
+{
+    string currLine = "";
+    string productName = product.product;
+    int quantity = product.availableQuantity;
+
+    if (!isNameValid(productName)) return "";
+    if (!isIntPositive(quantity)) return "";
+
+    currLine += productName + "-" + to_string(quantity);
+
+    return currLine;
+}
+
+void saveTheDataInTheStorageFile(ofstream& file)
+{
+    string currStorageLine = "";
+    Storage currProduct;
+    for (size_t i = 0; i < storage.size(); i++)
+    {
+        currProduct = storage[i];
+        currStorageLine = structureDataForStorageFile(currProduct);
+        file << currStorageLine << "\n";
+    }
+}
+
+// Create the line with the right format for the orders.txt file
+string structureDataForOrdersFile(Order order)
+{
+    string currLine = "";
+    string productName = order.productName;
+    string date = order.date;
+
+    if (!isNameValid(productName)) return "";
+    if (!isValidDate(date)) return "";
+
+    currLine += productName + "=" + date;
+
+    return currLine;
+}
+
+void saveTheDataInTheOrdersFile(ofstream& file)
+{
+    string currOrderLine = "";
+    Order currOrder;
+    for (size_t i = 0; i < orders.size(); i++)
+    {
+        currOrder = orders[i];
+        currOrderLine = structureDataForOrdersFile(currOrder);
+        file << currOrderLine << "\n";
+    }
+}
+
 void generateData()
 {
     createFilesIfNotGeneratedYet();
@@ -299,11 +355,11 @@ void saveDataToAllFiles()
         }
         else if (filename == STORAGE_FILE_NAME)
         {
-
+            saveTheDataInTheStorageFile(file);
         }
         else if (filename == ORDERS_FILE_NAME)
         {
-
+            saveTheDataInTheOrdersFile(file);
         }
         else if (filename == DAILY_REPORTS_FILE_NAME)
         {
