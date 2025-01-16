@@ -37,7 +37,11 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 7:
-		if (!userRole) exit(0);
+		if (!userRole)
+		{
+			saveData();
+			exit(0);
+		}
 		break;
 
 	case 8:
@@ -59,6 +63,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 14:
+		saveData();
 		exit(0);
 		break;
 

@@ -29,6 +29,10 @@ vector<Storage> storage;
 vector<Order> orders;
 vector<DailyReport> dailyReports;
 
+
+
+// Functions that read the data from the files when the program starts running
+
 void createFilesIfNotGeneratedYet() {
     vector<string> filenames = {
         "menu.txt",
@@ -236,6 +240,69 @@ void addFirstWorkDay()
 }
 
 
+// Functions that save the updated data in the files
+
+string structureDataForMenuFile(FoodItem food)
+{
+    string currLine = "";
+    currLine += food.name + ";";
+
+    for (size_t j = 0; j < food.ingridients.size(); ++j)
+    {
+        Ingridients ing = food.ingridients[j];
+        currLine += ing.name + "-" + to_string(ing.quantity);
+
+        if (j < food.ingridients.size() - 1)
+        {
+            currLine += ",";
+        }
+    }
+
+    currLine += ";" + to_string(food.price);
+
+    return currLine;
+}
+
+void saveDataToFile(const string& filename)
+{
+    ofstream file(filename);
+
+    if (!file)
+    {
+        cout << "Error: Could not open file " << filename << " for writing." << endl;
+        return;
+    }
+
+    if (filename == "menu.txt")
+    {
+        string currMenuLine = "";
+        FoodItem currFood;
+        for (size_t i = 0; i < menu.size(); i++)
+        {
+            currFood = menu[i];
+            currMenuLine = structureDataForMenuFile(currFood);
+            file << currMenuLine << "\n";
+        }
+    }
+    else if (filename == "storage.txt")
+    {
+
+    }
+    else if (filename == "orders.txt")
+    {
+
+    }
+    else if (filename == "dailyReports.txt")
+    {
+
+    }
+
+    file.close();
+    cout << "File saved successfully: " << filename << endl;
+}
+
+
+
 void generateData()
 {
     createFilesIfNotGeneratedYet();
@@ -244,5 +311,11 @@ void generateData()
     readDataFromFile("orders.txt");
     readDataFromFile("dailyReports.txt");
 }
+
+void saveData()
+{
+    saveDataToFile("menu.txt");
+}
+
 
 #endif
