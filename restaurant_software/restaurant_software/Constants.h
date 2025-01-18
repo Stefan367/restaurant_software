@@ -44,4 +44,8 @@ const vector<string> FILENAMES = {
     DAILY_REPORTS_FILE_NAME
 };
 
+const int DAYS_STRING_LENGTH = 2;
+const int MONTH_STRING_LENGTH = 2;
+const int YEAR_STRING_LENGTH = 4;
+
 #endif

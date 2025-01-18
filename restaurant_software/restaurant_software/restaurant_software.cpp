@@ -39,6 +39,7 @@ void completeOption(unsigned int choice)
 	case 7:
 		if (!userRole)
 		{
+			startNewWorkingDay();
 			saveDataToAllFiles();
 			exit(0);
 		}
@@ -51,6 +52,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 10:
+		startNewWorkingDay();
 		break;
 
 	case 11:
@@ -63,6 +65,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 14:
+		startNewWorkingDay();
 		saveDataToAllFiles();
 		exit(0);
 		break;

@@ -24,6 +24,25 @@ using namespace std;
 #include "GenerateData.h"
 #include "Constants.h"
 
+void startNewWorkingDay()
+{
+    DailyReport currentWorkingDay = dailyReports.back();
+    const string today = currentWorkingDay.date;
+    const string newDay = generateNextDay(today);
+
+    if (!isDateWithValidFormat(today) || !isDateWithValidFormat(newDay))
+    {
+        cout << "Invalid date format!" << endl;
+        return;
+    }
+
+    double newDailySales = 0.0;
+    DailyReport newWorkDay;
+    newWorkDay.date = newDay;
+    newWorkDay.totalAmount = newDailySales;
+    dailyReports.push_back(newWorkDay);
+}
+
 // Function to print the menu
 void printMenu()
 {

@@ -20,6 +20,8 @@
 #define HELPERFUNCTIONS_H
 using namespace std;
 
+#include "Constants.h"
+
 bool doesElementContainsInAnArray(unsigned int element, const int arr[], const unsigned int size)
 {
 	for (size_t i = 0; i < size; i++)
@@ -62,17 +64,17 @@ int stringToInt(const string& str)
 
 	if (str.empty())
 	{
-		cout << "Invalid data for quantity.";
+		cout << "Invalid data for integer.";
 	}
 
 	// Check for negative sign
 	if (str[0] == '-')
 	{
-		cout << "Negative quantity trying to be added";
+		cout << "Negative intiger trying to be added";
 		return -1;
 	}
 
-	// Process each character
+	// Check each character
 	for (size_t i = 0; i < str.size(); ++i)
 	{
 		char ch = str[i];
@@ -153,6 +155,83 @@ double stringToDouble(const string& str)
 	result += fractionalPart;
 
 	return result;
+}
+
+string intToString(int value, const int width)
+{
+	string result = to_string(value);
+
+	while (result.length() < width)
+	{
+		result = "0" + result;
+	}
+	return result;
+}
+
+string intToValidDateFormatString(int value, int width)
+{
+	string result = to_string(value);
+
+	while (result.length() < width)
+	{
+		result = "0" + result;
+	}
+	return result;
+}
+
+bool isLeapYear(int year)
+{
+	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+bool isDateWithValidFormat(const string date)
+{
+	return (date.length() == 10 && date[2] == '-' && date[5] == '-');
+}
+
+string generateNextDay(const string& date)
+{
+
+	vector<int> daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+	// Parse the date
+	if (!isDateWithValidFormat(date))
+	{
+		cout << "Invalid date format: " << date << endl;
+		return "";
+	}
+
+	int day = stringToInt(date.substr(0, DAYS_STRING_LENGTH));
+	int month = stringToInt(date.substr(3, MONTH_STRING_LENGTH));
+	int year = stringToInt(date.substr(6, YEAR_STRING_LENGTH));
+
+	// February days count case
+	if (isLeapYear(year))
+	{
+		daysInMonth[1] = 29;
+	}
+
+	day++;
+
+	// Check if the day gets bigger than the days in the current month
+	if (day > daysInMonth[month - 1])
+	{
+		day = 1;
+		month++;
+
+		// Check if month gets into a new year
+		if (month > 12) {
+			month = 1;
+			year++;
+		}
+	}
+
+	// Format the new date
+	string newDate = intToString(day, DAYS_STRING_LENGTH) + "-"
+		+ intToString(month, MONTH_STRING_LENGTH) + "-"
+		+ intToString(year, YEAR_STRING_LENGTH);
+
+	return newDate;
 }
 
 vector<string> splitString(const string& str, char delimiter)

@@ -53,20 +53,13 @@ bool isNameValid(const string& name)
 	return true;
 }
 
-bool isLeapYear(int year)
-{
-	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-}
-
 bool isValidDate(const string& date)
 {
 	// valid date: 01-01-2025
 
-	if (date.length() != 10) {
-		return false;
-	}
-
-	if (date[2] != '-' || date[5] != '-') {
+	if (!isDateWithValidFormat(date))
+	{
+		cout << "Invalid date format: " << date << endl;
 		return false;
 	}
 
