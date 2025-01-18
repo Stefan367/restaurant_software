@@ -65,6 +65,19 @@ string getTodaysDate()
     return today;
 }
 
+void addNewOrderToAllOrders(const string& orderedMeal)
+{
+    if (!isNameValid(orderedMeal)) return;
+
+    string today = getTodaysDate();
+
+    Order newOrder;
+    newOrder.productName = orderedMeal;
+    newOrder.date = today;
+
+    orders.push_back(newOrder);
+}
+
 // Function to print the menu
 void printMenu()
 {
