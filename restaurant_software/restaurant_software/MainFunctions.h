@@ -8,7 +8,7 @@
 * @idnumber 2MI0600509
 * @compiler VCC
 *
-* Here are the main functionalities for the projrct
+* Here are the main functionalities for the project
 *
 */
 
@@ -77,6 +77,69 @@ void addNewOrderToAllOrders(const string& orderedMeal)
 
     orders.push_back(newOrder);
 }
+
+// Check if the menu has a given meal
+bool doesMenuHasGivenMeal(const string& meal)
+{
+    if (!isNameValid(meal)) return false;
+
+    FoodItem currFood;
+    for (size_t i = 0; i < menu.size(); i++)
+    {
+        currFood = menu[i];
+        if (meal == currFood.name)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Take a meal from the menu if it exist
+FoodItem takeAMealFromTheMenu(const string& meal)
+{
+    if (!isNameValid(meal)) return { "", {}, 0.0 };
+
+    FoodItem currMeal;
+    for (size_t i = 0; i < menu.size(); i++)
+    {
+        currMeal = menu[i];
+        if (meal == currMeal.name)
+        {
+            break;
+        }
+    }
+    return currMeal;
+}
+
+// Check if storage contains a certain product to prepare a meal
+bool doesStorageContainsProductForMeal(Ingridients ingridient)
+{
+    Storage currProduct;
+    for (size_t i = 0; i < storage.size(); i++)
+    {
+        currProduct = storage[i];
+
+        if (isStorageItemEmpty(currProduct)) return false;
+
+        if (ingridient.name == currProduct.product)
+        {
+            if (ingridient.quantity <= currProduct.availableQuantity)
+            {
+                return true;
+            }
+            else
+            {
+                cout << "Not enough quantity of " << currProduct.product
+                    << " (available: " << currProduct.availableQuantity << " g)";
+                return false;
+            }
+        }
+    }
+}
+
+
+// MAIN FUNCTIONS IN THE APP
 
 // Function to print the menu
 void printMenu()
