@@ -15,6 +15,7 @@ using namespace std;
 
 void completeOption(unsigned int choice)
 {
+	string order;
 	switch (choice)
 	{
 	case 1:
@@ -22,6 +23,12 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 2:
+		// Clear the console if there is something you do not need
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		cout << "What would you like to order: ";
+		getline(cin, order);
+		orderFoodFromTheMenu(order);
 		break;
 
 	case 3:

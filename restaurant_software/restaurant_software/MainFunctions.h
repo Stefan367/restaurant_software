@@ -138,6 +138,62 @@ bool doesStorageContainsProductForMeal(Ingridients ingridient)
     }
 }
 
+// Remove the needed quantity of each product to prepare a meal
+bool prepareMeal(FoodItem& meal)
+{
+    if (isFoodItemEmpty(meal))
+    {
+        cout << "Invalid meal!";
+        return false;
+    }
+
+    vector<Ingridients> currProductIngridients = meal.ingridients;
+    Ingridients currIngridient;
+    Storage currProductToUse;
+
+    bool canPrepare = true;
+
+    for (size_t i = 0; i < currProductIngridients.size(); i++)
+    {
+        if (!doesStorageContainsProductForMeal(currIngridient))
+        {
+            canPrepare = false;
+        }
+    }
+
+    if (!canPrepare)
+    {
+        cout << "Cannot prepare meal " << meal.name << "." << endl;
+        return false;
+    }
+
+    for (const auto& currIngridient : currProductIngridients)
+    {
+        // Use reference to modify the original object
+        for (auto& currProductToUse : storage)
+        {
+            if (currIngridient.name == currProductToUse.product)
+            {
+                currProductToUse.availableQuantity -= currIngridient.quantity;
+            }
+        }
+    }
+    cout << "Meal " << meal.name << " prepared successfully." << endl;
+    return true;
+}
+
+void updateDailyReport(const double mealPrice)
+{
+    if (!dailyReports.empty())
+    {
+        dailyReports.back().totalAmount += mealPrice;
+    }
+    else
+    {
+        cout << "Warning: No daily report available to update the total amount." << endl;
+    }
+}
+
 
 // MAIN FUNCTIONS IN THE APP
 
@@ -157,6 +213,27 @@ void printMenu()
         }
         cout << "Price: " << food.price << " BGN\n" << endl;
     }
+}
+
+// Order something from the menu
+void orderFoodFromTheMenu(const string& orderedMeal)
+{
+    if (!isNameValid(orderedMeal)) return;
+
+    if (!doesMenuHasGivenMeal(orderedMeal))
+    {
+        cout << "There is not " << orderedMeal << " in the menu." << endl;
+        return;
+    }
+
+    FoodItem order = takeAMealFromTheMenu(orderedMeal);
+    if (!prepareMeal(order))
+    {
+        return;
+    }
+    addNewOrderToAllOrders(order.name);
+    updateDailyReport(order.price);
+
 }
 
 #endif

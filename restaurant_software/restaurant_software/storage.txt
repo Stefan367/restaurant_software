@@ -1,2 +1,2 @@
-tomatoes-10000
-cucumbers-10000
+tomatoes-9800
+cucumbers-9850
