@@ -52,7 +52,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 10:
-		startNewWorkingDay();
+		//startNewWorkingDay();
 		break;
 
 	case 11:

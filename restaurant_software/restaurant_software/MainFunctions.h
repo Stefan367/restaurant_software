@@ -24,6 +24,21 @@ using namespace std;
 #include "GenerateData.h"
 #include "Constants.h"
 
+bool isFoodItemEmpty(const FoodItem& meal)
+{
+    return meal.name.empty() || meal.ingridients.empty();
+}
+
+bool isIngridientItemEmpty(const Ingridients& ing)
+{
+    return ing.name.empty();
+}
+
+bool isStorageItemEmpty(const Storage& item)
+{
+    return item.product.empty();
+}
+
 void startNewWorkingDay()
 {
     DailyReport currentWorkingDay = dailyReports.back();
