@@ -58,6 +58,13 @@ void startNewWorkingDay()
     dailyReports.push_back(newWorkDay);
 }
 
+// Get the today's date
+string getTodaysDate()
+{
+    string today = dailyReports.back().date;
+    return today;
+}
+
 // Function to print the menu
 void printMenu()
 {
