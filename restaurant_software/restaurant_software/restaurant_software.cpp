@@ -24,11 +24,10 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 2:
-		// Clear the console if there is something you do not need
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-		cout << "What would you like to order: ";
-		getline(cin, order);
+		while (order.empty())
+		{
+			order = getValidStringFromConsole(MAKE_AN_ORDER_MESSAGE);
+		}
 		orderFoodFromTheMenu(order);
 		break;
 
