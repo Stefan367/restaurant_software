@@ -16,6 +16,7 @@ using namespace std;
 void completeOption(unsigned int choice)
 {
 	string order;
+	string storageProduct;
 	switch (choice)
 	{
 	case 1:
@@ -61,6 +62,12 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 8:
+		viewWhatHadLeftInTheStorage();
+		while (storageProduct.empty())
+		{
+			storageProduct = getValidStringFromConsole(REMOVE_PRODUCT_FROM_STORAGE_MESSAGE);
+		}
+		removeProductFromStorage(storageProduct);
 		break;
 
 	case 9:

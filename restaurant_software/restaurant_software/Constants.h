@@ -44,8 +44,14 @@ const vector<string> FILENAMES = {
     DAILY_REPORTS_FILE_NAME
 };
 
+const int MIN_NAMES_LENGTH = 3;
+
 const int DAYS_STRING_LENGTH = 2;
 const int MONTH_STRING_LENGTH = 2;
 const int YEAR_STRING_LENGTH = 4;
+
+const string MAKE_AN_ORDER_MESSAGE = "What would you like to order: ";
+const string REMOVE_PRODUCT_FROM_STORAGE_MESSAGE = "Enter the product you want to remove: ";
+
 
 #endif

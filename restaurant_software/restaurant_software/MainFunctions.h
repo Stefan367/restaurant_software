@@ -55,6 +55,16 @@ bool areThereNoDailyReports()
     return dailyReports.empty();
 }
 
+bool indicateIfStorageIsEmpty()
+{
+    if (isTheStorageEmpty())
+    {
+        cout << "There is nothing left in the storage." << endl;
+        return false;
+    }
+    return true;
+}
+
 void startNewWorkingDay()
 {
     DailyReport currentWorkingDay = dailyReports.back();
@@ -432,6 +442,24 @@ void viewWhatHadLeftInTheStorage()
     {
         cout << storage[i].product << " - " << storage[i].availableQuantity << " g" << endl;
     }
+}
+
+// Remove a given product from storage
+void removeProductFromStorage(const string& productName)
+{
+    if (!indicateIfStorageIsEmpty()) return;
+
+    for (size_t i = 0; i < storage.size(); ++i)
+    {
+        if (storage[i].product == productName)
+        {
+            storage.erase(storage.begin() + i);
+            cout << "Product " << productName << " removed from storage." << endl;
+            return;
+        }
+    }
+
+    cout << "Product " << productName << " not found in storage." << endl;
 }
 
 #endif

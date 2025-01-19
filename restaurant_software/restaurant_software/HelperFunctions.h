@@ -278,4 +278,16 @@ bool containsNumbers(const string& str)
 	return false;
 }
 
+bool containsOnlyLetters(const string& str)
+{
+	for (size_t i = 0; i < str.size(); ++i)
+	{
+		if (!isLetter(str[i]) && str[i] != ' ')
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 #endif

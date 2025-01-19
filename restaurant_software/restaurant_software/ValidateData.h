@@ -45,9 +45,10 @@ bool isDoublePositive(const double n)
 
 bool isNameValid(const string& name)
 {
-	if (name.size() < 3 || containsNumbers(name))
+	if (name.size() < MIN_NAMES_LENGTH || (!containsOnlyLetters(name)))
 	{
-		cout << "All strings such as product name and menu item name should be at least 3 characters long and contains only letters: " << name << endl;
+		cout << "All strings such as product name and menu item name should be "
+			<< "at least 3 characters long and contains only letters : " << name << endl;
 		return false;
 	}
 	return true;
@@ -95,6 +96,27 @@ bool isValidDate(const string& date)
 	}
 
 	return true;
+}
+
+// Validate string input from the console until it's valid
+string getValidStringFromConsole(const string& prompt)
+{
+	string input;
+
+	cin.ignore(numeric_limits<streamsize>::max(), NEW_LINE);
+	while (true)
+	{
+
+		cout << prompt;
+		getline(cin, input);
+
+		if (isNameValid(input))
+		{
+			break;
+		}
+	}
+
+	return input;
 }
 
 #endif
