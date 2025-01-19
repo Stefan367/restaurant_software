@@ -36,6 +36,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 4:
+		viewAllOrders();
 		break;
 
 	case 5:

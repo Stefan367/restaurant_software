@@ -39,6 +39,22 @@ bool isStorageItemEmpty(const Storage& item)
     return item.product.empty();
 }
 
+// Check if vectors are empty
+bool areThereNoOrders()
+{
+    return orders.empty();
+}
+
+bool isTheStorageEmpty()
+{
+    return storage.empty();
+}
+
+bool areThereNoDailyReports()
+{
+    return dailyReports.empty();
+}
+
 void startNewWorkingDay()
 {
     DailyReport currentWorkingDay = dailyReports.back();
@@ -215,14 +231,12 @@ bool prepareMeal(FoodItem& meal)
 
 void updateDailyReport(const double mealPrice)
 {
-    if (!dailyReports.empty())
-    {
-        dailyReports.back().totalAmount += mealPrice;
-    }
-    else
+    if (areThereNoDailyReports())
     {
         cout << "Warning: No daily report available to update the total amount." << endl;
+        return;
     }
+    dailyReports.back().totalAmount += mealPrice;
 }
 
 
@@ -271,7 +285,7 @@ void orderFoodFromTheMenu(const string& orderedMeal)
 void cancelLastOrder()
 {
     string today = getTodaysDate();
-    if (orders.empty() || orders.back().date != today)
+    if (areThereNoOrders() || orders.back().date != today)
     {
         cout << "No orders to cancel or there are no orders for today!" << endl;
         return;
@@ -294,7 +308,7 @@ void cancelLastOrder()
     addUnusedIngridientsInStorage(meal);
 
     // Subtract the meal price from today's daily report
-    if (dailyReports.empty())
+    if (areThereNoDailyReports())
     {
         cout << "Warning: No daily report to update!" << endl;
         return;
@@ -302,6 +316,22 @@ void cancelLastOrder()
     dailyReports.back().totalAmount -= meal.price;
 
     cout << "Order for " << lastOrder << " has been successfully canceled." << endl;
+}
+
+// View all previous orders
+void viewAllOrders()
+{
+    if (areThereNoOrders())
+    {
+        cout << "There are no previous orders." << endl;
+        return;
+    }
+    Order currOrder;
+    for (size_t i = 0; i < orders.size(); i++)
+    {
+        currOrder = orders[i];
+        cout << currOrder.productName << " <--> " << currOrder.date << "." << endl;
+    }
 }
 
 
