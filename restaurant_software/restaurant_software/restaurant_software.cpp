@@ -18,6 +18,7 @@ void completeOption(unsigned int choice)
 	string order;
 	string storageProduct;
 	string date;
+	string mealName;
 	int quantity = 0;
 
 	switch (choice)
@@ -113,6 +114,16 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 13:
+		if (!indicateIfMenuIsEmpty()) break;
+
+		printMenu();
+		while (mealName.empty())
+		{
+			mealName = getValidStringFromConsole(REMOVE_ITEM_FROM_MENU_MESSAGE);
+		}
+		removeItemFromMenu(mealName);
+
+		giveStringDefaultValue(mealName);
 		break;
 
 	case 14:

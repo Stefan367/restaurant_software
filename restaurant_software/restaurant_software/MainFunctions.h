@@ -55,11 +55,26 @@ bool areThereNoDailyReports()
     return dailyReports.empty();
 }
 
+bool isMenuEmpty()
+{
+    return menu.empty();
+}
+
 bool indicateIfStorageIsEmpty()
 {
     if (isTheStorageEmpty())
     {
         cout << "There is nothing left in the storage." << endl;
+        return false;
+    }
+    return true;
+}
+
+bool indicateIfMenuIsEmpty()
+{
+    if (isMenuEmpty())
+    {
+        cout << "There is nothing in the menu." << endl;
         return false;
     }
     return true;
@@ -546,6 +561,26 @@ void showDailyReportsFromGivenDateToToday(const string& date)
     {
         cout << dailyReports[i].date << " - " << dailyReports[i].totalAmount << " BGN" << endl;
     }
+}
+
+// Remove item from the menu
+void removeItemFromMenu(const string& mealName)
+{
+    if (!isNameValid(mealName)) return;
+
+    if (!indicateIfMenuIsEmpty()) return;
+
+    for (size_t i = 0; i < menu.size(); ++i)
+    {
+        if (menu[i].name == mealName)
+        {
+            menu.erase(menu.begin() + i);
+            cout << "Item " << mealName << " removed from menu." << endl;
+            return;
+        }
+    }
+
+    cout << "Item " << mealName << " not found in menu." << endl;
 }
 
 #endif
