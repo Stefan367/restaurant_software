@@ -115,6 +115,8 @@ FoodItem takeAMealFromTheMenu(const string& meal)
 // Check if storage contains a certain product to prepare a meal
 bool doesStorageContainsProductForMeal(Ingridients ingridient)
 {
+    bool foundInStorage = false;
+
     Storage currProduct;
     for (size_t i = 0; i < storage.size(); i++)
     {
@@ -124,6 +126,7 @@ bool doesStorageContainsProductForMeal(Ingridients ingridient)
 
         if (ingridient.name == currProduct.product)
         {
+            foundInStorage = true;
             if (ingridient.quantity <= currProduct.availableQuantity)
             {
                 return true;
@@ -136,6 +139,44 @@ bool doesStorageContainsProductForMeal(Ingridients ingridient)
             }
         }
     }
+    if (!foundInStorage)
+    {
+        cout << "Product " << ingridient.name << " not found in storage." << endl;
+    }
+
+    return false;
+}
+
+// Add the quantity of ingridients if an order is canceled
+void addUnusedIngridientsInStorage(FoodItem& meal)
+{
+    for (const auto& ingridient : meal.ingridients)
+    {
+        for (auto& product : storage)
+        {
+            if (product.product == ingridient.name)
+            {
+                product.availableQuantity += ingridient.quantity;
+                cout << "Restocked " << ingridient.quantity << " g of " << product.product
+                    << " (new total: " << product.availableQuantity << " g)." << std::endl;
+            }
+        }
+    }
+}
+
+// Substract the quantity of ingridients if an order is made
+void substractUnusedIngridientsInStorage(FoodItem& meal)
+{
+    for (const auto& currIngridient : meal.ingridients)
+    {
+        for (auto& currProductToUse : storage)
+        {
+            if (currIngridient.name == currProductToUse.product)
+            {
+                currProductToUse.availableQuantity -= currIngridient.quantity;
+            }
+        }
+    }
 }
 
 // Remove the needed quantity of each product to prepare a meal
@@ -143,17 +184,15 @@ bool prepareMeal(FoodItem& meal)
 {
     if (isFoodItemEmpty(meal))
     {
-        cout << "Invalid meal!";
+        cout << "Invalid meal!" << endl;
         return false;
     }
 
     vector<Ingridients> currProductIngridients = meal.ingridients;
-    Ingridients currIngridient;
-    Storage currProductToUse;
-
     bool canPrepare = true;
 
-    for (size_t i = 0; i < currProductIngridients.size(); i++)
+    // Check if all ingredients are available in the storage
+    for (const auto& currIngridient : currProductIngridients)
     {
         if (!doesStorageContainsProductForMeal(currIngridient))
         {
@@ -167,17 +206,9 @@ bool prepareMeal(FoodItem& meal)
         return false;
     }
 
-    for (const auto& currIngridient : currProductIngridients)
-    {
-        // Use reference to modify the original object
-        for (auto& currProductToUse : storage)
-        {
-            if (currIngridient.name == currProductToUse.product)
-            {
-                currProductToUse.availableQuantity -= currIngridient.quantity;
-            }
-        }
-    }
+    // Deduct quantities from storage
+    substractUnusedIngridientsInStorage(meal);
+
     cout << "Meal " << meal.name << " prepared successfully." << endl;
     return true;
 }
@@ -235,5 +266,43 @@ void orderFoodFromTheMenu(const string& orderedMeal)
     updateDailyReport(order.price);
 
 }
+
+// Cancel order
+void cancelLastOrder()
+{
+    string today = getTodaysDate();
+    if (orders.empty() || orders.back().date != today)
+    {
+        cout << "No orders to cancel or there are no orders for today!" << endl;
+        return;
+    }
+
+    // Get the last order
+    string lastOrder = orders.back().productName;
+
+    orders.pop_back();
+
+    // Find the meal in the menu
+    FoodItem meal = takeAMealFromTheMenu(lastOrder);
+    if (isFoodItemEmpty(meal))
+    {
+        cout << "Error: Meal not found in the menu!" << endl;
+        return;
+    }
+
+    // Add quantities back to the storage
+    addUnusedIngridientsInStorage(meal);
+
+    // Subtract the meal price from today's daily report
+    if (dailyReports.empty())
+    {
+        cout << "Warning: No daily report to update!" << endl;
+        return;
+    }
+    dailyReports.back().totalAmount -= meal.price;
+
+    cout << "Order for " << lastOrder << " has been successfully canceled." << endl;
+}
+
 
 #endif

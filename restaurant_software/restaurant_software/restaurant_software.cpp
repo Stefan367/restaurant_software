@@ -32,6 +32,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 3:
+		cancelLastOrder();
 		break;
 
 	case 4:
