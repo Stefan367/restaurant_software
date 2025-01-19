@@ -59,6 +59,7 @@ const string MAKE_AN_ORDER_MESSAGE = "What would you like to order: ";
 const string REMOVE_PRODUCT_FROM_STORAGE_MESSAGE = "Enter the product name you want to remove: ";
 const string ADD_PRODUCT_TO_STORAGE_MESSAGE = "Enter the product name you want to add: ";
 const string PRODUCT_QUANTITY_MESSAGE = "Enter the product quantity: ";
+const string VALIDATE_DATE_MESSAGE = "Enter the date you want daily reports from: ";
 
 
 #endif

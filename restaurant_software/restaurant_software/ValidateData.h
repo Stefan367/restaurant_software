@@ -156,4 +156,25 @@ int getValidIntigerFromConsole(const string& prompt)
 	return quantity;
 }
 
+string getValidDateFromConsole(const string& prompt)
+{
+	string input;
+
+	cin.ignore(numeric_limits<streamsize>::max(), NEW_LINE);
+	while (true)
+	{
+
+		cout << prompt;
+		getline(cin, input);
+
+		if (isValidDate(input))
+		{
+			break;
+		}
+		cout << "Invalid date!" << endl;
+	}
+
+	return input;
+}
+
 #endif

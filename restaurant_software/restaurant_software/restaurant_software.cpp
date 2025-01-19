@@ -17,6 +17,7 @@ void completeOption(unsigned int choice)
 {
 	string order;
 	string storageProduct;
+	string date;
 	int quantity = 0;
 
 	switch (choice)
@@ -98,6 +99,14 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 11:
+
+		while (date.empty())
+		{
+			date = getValidDateFromConsole(VALIDATE_DATE_MESSAGE);
+		}
+		showDailyReportsFromGivenDateToToday(date);
+
+		giveStringDefaultValue(date);
 		break;
 
 	case 12:

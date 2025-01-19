@@ -509,4 +509,43 @@ void makeDailyReport()
     startNewWorkingDay();
 }
 
+// View all daily reports from a given date to today
+
+// Get the index of the first daily report with the given date
+int getIndexOfTheFirstDailyReportWithDate(const string& date)
+{
+    for (size_t i = 0; i < dailyReports.size(); i++)
+    {
+        if (dailyReports[i].date == date)
+        {
+            return  i;
+        }
+    }
+    return 0;
+}
+
+void showDailyReportsFromGivenDateToToday(const string& date)
+{
+    if (!isValidDate(date))
+    {
+        cout << "Invalid date: " << date << endl;
+        return;
+    }
+
+    int indexToStartFrom = getIndexOfTheFirstDailyReportWithDate(date);
+
+    if (!indexToStartFrom)
+    {
+        cout << "There are no daily reports with the given date." << endl;
+        return;
+    }
+
+    cout << "Daily Reports from " << date << " to " << getTodaysDate() << " :" << endl;
+
+    for (size_t i = indexToStartFrom; i < dailyReports.size(); i++)
+    {
+        cout << dailyReports[i].date << " - " << dailyReports[i].totalAmount << " BGN" << endl;
+    }
+}
+
 #endif
