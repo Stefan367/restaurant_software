@@ -54,6 +54,10 @@ void completeOption(unsigned int choice)
 			saveDataToAllFiles();
 			exit(0);
 		}
+		else
+		{
+			viewWhatHadLeftInTheStorage();
+		}
 		break;
 
 	case 8:

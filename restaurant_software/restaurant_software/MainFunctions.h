@@ -418,4 +418,20 @@ void showTodaysDailyReport()
         << todaysDailyReport.totalAmount << " BGN" << endl;
 }
 
+// View data in storage
+void viewWhatHadLeftInTheStorage()
+{
+    if (isTheStorageEmpty())
+    {
+        cout << "There is nothing left in the storage." << endl;
+    }
+
+    cout << "The storage contains: " << endl;
+
+    for (size_t i = 0; i < storage.size(); i++)
+    {
+        cout << storage[i].product << " - " << storage[i].availableQuantity << " g" << endl;
+    }
+}
+
 #endif
