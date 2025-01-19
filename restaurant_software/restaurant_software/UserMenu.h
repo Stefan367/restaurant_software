@@ -32,7 +32,7 @@ bool isChoiceValid(unsigned int choice)
 
 bool checkIsRoleValid(string role)
 {
-	return (role == "waiter" || role == "manager") ? 1 : 0;
+	return (role == "waiter" || role == "manager") ? true : false;
 }
 
 void setUserRole(string role)

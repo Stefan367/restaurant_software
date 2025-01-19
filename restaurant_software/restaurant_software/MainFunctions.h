@@ -402,4 +402,20 @@ void viewMealsSortedAndWithCounts()
     }
 }
 
+// Show the Daily Report for today
+void showTodaysDailyReport()
+{
+    if (areThereNoDailyReports())
+    {
+        cout << "There are no daily reports." << endl;
+        return;
+    }
+
+    const DailyReport todaysDailyReport = dailyReports.back();
+
+    cout << "The daily sales for today ("
+        << todaysDailyReport.date << ") are "
+        << todaysDailyReport.totalAmount << " BGN" << endl;
+}
+
 #endif

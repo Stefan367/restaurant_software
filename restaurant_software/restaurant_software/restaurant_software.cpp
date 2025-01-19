@@ -44,6 +44,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 6:
+		showTodaysDailyReport();
 		break;
 
 	case 7:
