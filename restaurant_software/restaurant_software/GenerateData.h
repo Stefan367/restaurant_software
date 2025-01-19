@@ -186,29 +186,29 @@ void readDataFromFile(string filename)
     }
 
     unsigned int fileToReadFrom = 0;
-    if (filename == MENU_FILE_NAME) fileToReadFrom = 1;
-    else if (filename == STORAGE_FILE_NAME) fileToReadFrom = 2;
-    else if (filename == ORDERS_FILE_NAME) fileToReadFrom = 3;
-    else if (filename == DAILY_REPORTS_FILE_NAME) fileToReadFrom = 4;
+    if (filename == MENU_FILE_NAME) fileToReadFrom = MENU_FILE_NUMBER;
+    else if (filename == STORAGE_FILE_NAME) fileToReadFrom = STORAGE_FILE_NUMBER;
+    else if (filename == ORDERS_FILE_NAME) fileToReadFrom = ORDERS_FILE_NUMBER;
+    else if (filename == DAILY_REPORTS_FILE_NAME) fileToReadFrom = DAILY_REPORTS_FILE_NUMBER;
 
     string line;
     while (getline(file, line))
     {
         switch (fileToReadFrom)
         {
-        case 1:
+        case MENU_FILE_NUMBER:
             parseMenuLine(line);
             break;
 
-        case 2:
+        case STORAGE_FILE_NUMBER:
             parseStorageLine(line);
             break;
 
-        case 3:
+        case ORDERS_FILE_NUMBER:
             parseOrderLine(line);
             break;
 
-        case 4:
+        case DAILY_REPORTS_FILE_NUMBER:
             parseDailyReportLine(line);
             break;
         default:
