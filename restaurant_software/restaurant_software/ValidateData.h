@@ -27,7 +27,7 @@ bool isIntPositive(const int n)
 {
 	if (n <= 0)
 	{
-		cout << "Numbers cannot be negative." << endl;
+		cout << "Values like quantity must be positive." << endl;
 		return false;
 	}
 	return true;
@@ -35,9 +35,19 @@ bool isIntPositive(const int n)
 
 bool isDoublePositive(const double n)
 {
+	if (n <= 0.0)
+	{
+		cout << "Values like price must be positive." << endl;
+		return false;
+	}
+	return true;
+}
+
+bool isDoublePositiveOrZeroForDailyReports(const double n)
+{
 	if (n < 0.0)
 	{
-		cout << "Numbers cannot be negative";
+		cout << "Values of daily sales must be positive or 0." << endl;
 		return false;
 	}
 	return true;

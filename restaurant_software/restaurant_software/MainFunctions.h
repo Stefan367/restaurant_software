@@ -491,4 +491,22 @@ void addProductInStorage(const string& productName, int& quantity)
         << quantity << " g." << endl;
 }
 
+// Make a daily report
+void makeDailyReport()
+{
+    if (areThereNoDailyReports())
+    {
+        cout << "There are no daily reports." << endl;
+        return;
+    }
+
+    // Show the daily report for today
+    DailyReport todaysDailyReport = dailyReports.back();
+    cout << "The daily report for today is: " << todaysDailyReport.date << " -> "
+        << todaysDailyReport.totalAmount << " BGN" << endl;
+
+    // Create the daily report for the new day
+    startNewWorkingDay();
+}
+
 #endif

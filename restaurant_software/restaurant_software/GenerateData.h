@@ -166,7 +166,7 @@ void parseDailyReportLine(const string& line)
         cout << "Invalid date format: " << date << endl;
         return;
     }
-    if (!isDoublePositive(totalAmount)) return;
+    if (!isDoublePositiveOrZeroForDailyReports(totalAmount)) return;
 
     DailyReport dailyReport;
     dailyReport.date = date;
@@ -333,7 +333,7 @@ string structureDataForDailyReportsFile(DailyReport dailyReport)
     double totalSales = dailyReport.totalAmount;
 
     if (!isValidDate(date)) return "";
-    if (!isDoublePositive(totalSales)) return "";
+    if (!isDoublePositiveOrZeroForDailyReports(totalSales)) return "";
 
     currLine += date + "=" + to_string(totalSales);
 

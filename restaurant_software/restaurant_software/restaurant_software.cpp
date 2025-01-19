@@ -94,7 +94,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 10:
-		//startNewWorkingDay();
+		makeDailyReport();
 		break;
 
 	case 11:
