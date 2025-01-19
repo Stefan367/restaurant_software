@@ -270,6 +270,8 @@ void updateDailyReport(const double mealPrice)
 // Function to print the menu
 void printMenu()
 {
+    if (!indicateIfMenuIsEmpty()) return;
+
     cout << endl << "-------- M E N U --------" << endl;
 
     for (size_t i = 0; i < menu.size(); ++i)
