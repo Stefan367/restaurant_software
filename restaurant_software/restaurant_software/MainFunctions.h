@@ -334,5 +334,72 @@ void viewAllOrders()
     }
 }
 
+// Show all orders sorted and with the count of orders for each meal
+
+// Function to create a sorted temporary vector
+void swapOrders(Order& order1, Order& order2)
+{
+    Order temp = order1;
+    order1 = order2;
+    order2 = temp;
+}
+
+vector<Order> getSortedOrders(const vector<Order>& orders)
+{
+    vector<Order> sortedOrders = orders;
+
+    // Sort orders with Bubble Sort
+    for (size_t i = 0; i < sortedOrders.size(); ++i)
+    {
+        for (size_t j = 0; j < sortedOrders.size() - i - 1; ++j)
+        {
+            if (sortedOrders[j].productName > sortedOrders[j + 1].productName)
+            {
+                swapOrders(sortedOrders[j], sortedOrders[j + 1]);
+            }
+        }
+    }
+    return sortedOrders;
+}
+
+// Function to display meals only once with their order counts
+void viewMealsSortedAndWithCounts()
+{
+    if (areThereNoOrders())
+    {
+        cout << "There are no orders.";
+        return;
+    }
+
+    vector<Order> sortedOrders = getSortedOrders(orders);
+
+    // Iterate through the sorted orders and count each meal
+    string currentMeal = "";
+    int count = 0;
+
+    for (size_t i = 0; i < sortedOrders.size(); ++i)
+    {
+        if (sortedOrders[i].productName != currentMeal)
+        {
+            // If there is a diffrent meal, print the previous meal and reset count
+            if (!currentMeal.empty())
+            {
+                cout << currentMeal << " - Total orders: " << count << endl;
+            }
+            currentMeal = sortedOrders[i].productName;
+            count = 1;
+        }
+        else
+        {
+            count++;
+        }
+    }
+
+    // Print the last meal
+    if (!currentMeal.empty())
+    {
+        cout << currentMeal << " - Total orders: " << count << endl;
+    }
+}
 
 #endif

@@ -40,6 +40,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 5:
+		viewMealsSortedAndWithCounts();
 		break;
 
 	case 6:
