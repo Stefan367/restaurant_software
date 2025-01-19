@@ -51,7 +51,9 @@ const int MONTH_STRING_LENGTH = 2;
 const int YEAR_STRING_LENGTH = 4;
 
 const string MAKE_AN_ORDER_MESSAGE = "What would you like to order: ";
-const string REMOVE_PRODUCT_FROM_STORAGE_MESSAGE = "Enter the product you want to remove: ";
+const string REMOVE_PRODUCT_FROM_STORAGE_MESSAGE = "Enter the product name you want to remove: ";
+const string ADD_PRODUCT_TO_STORAGE_MESSAGE = "Enter the product name you want to add: ";
+const string PRODUCT_QUANTITY_MESSAGE = "Enter the product quantity: ";
 
 
 #endif

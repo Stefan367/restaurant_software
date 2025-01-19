@@ -462,4 +462,33 @@ void removeProductFromStorage(const string& productName)
     cout << "Product " << productName << " not found in storage." << endl;
 }
 
+// Add product to storage or increase quantity if it already exists
+void addProductInStorage(const string& productName, int& quantity)
+{
+    if (!isNameValid(productName)) return;
+
+    if (!isIntPositive)
+    {
+        cout << "Quantity must be greater than 0." << endl;
+        return;
+    }
+
+    // Check if the product already exists in the storage
+    for (auto& item : storage)
+    {
+        if (item.product == productName)
+        {
+            item.availableQuantity += quantity;
+            cout << "Increased quantity of " << productName << " by " << quantity
+                << " g. Total: " << item.availableQuantity << " g." << endl;
+            return;
+        }
+    }
+
+    // If the product does not exist, add it as a new entry
+    storage.push_back({ productName, quantity });
+    cout << "New product added in storage: " << productName << " with quantity: "
+        << quantity << " g." << endl;
+}
+
 #endif

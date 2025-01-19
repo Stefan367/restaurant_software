@@ -290,4 +290,19 @@ bool containsOnlyLetters(const string& str)
 	return true;
 }
 
+void giveStringDefaultValue(string& str)
+{
+	str = "";
+}
+
+void giveIntDefaultValue(int& number)
+{
+	number = 0;
+}
+
+void giveDoubleDefaultValue(double& floatingNumber)
+{
+	floatingNumber = 0.0;
+}
+
 #endif

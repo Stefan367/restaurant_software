@@ -17,6 +17,8 @@ void completeOption(unsigned int choice)
 {
 	string order;
 	string storageProduct;
+	int quantity = 0;
+
 	switch (choice)
 	{
 	case 1:
@@ -29,6 +31,8 @@ void completeOption(unsigned int choice)
 			order = getValidStringFromConsole(MAKE_AN_ORDER_MESSAGE);
 		}
 		orderFoodFromTheMenu(order);
+
+		giveStringDefaultValue(order);
 		break;
 
 	case 3:
@@ -67,9 +71,26 @@ void completeOption(unsigned int choice)
 			storageProduct = getValidStringFromConsole(REMOVE_PRODUCT_FROM_STORAGE_MESSAGE);
 		}
 		removeProductFromStorage(storageProduct);
+
+		giveStringDefaultValue(storageProduct);
 		break;
 
 	case 9:
+
+		viewWhatHadLeftInTheStorage();
+
+		while (storageProduct.empty())
+		{
+			storageProduct = getValidStringFromConsole(ADD_PRODUCT_TO_STORAGE_MESSAGE);
+		}
+		while (quantity <= 0)
+		{
+			quantity = getValidIntigerFromConsole(PRODUCT_QUANTITY_MESSAGE);
+		}
+		addProductInStorage(storageProduct, quantity);
+
+		giveStringDefaultValue(storageProduct);
+		giveIntDefaultValue(quantity);
 		break;
 
 	case 10:

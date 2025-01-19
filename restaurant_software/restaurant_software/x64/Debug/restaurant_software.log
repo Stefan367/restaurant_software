@@ -1,2 +1,5 @@
 ﻿  restaurant_software.cpp
+C:\stefan\restaurant_software\restaurant_software\restaurant_software\MainFunctions.h(470,9): warning C4551: function call missing argument list
+  (compiling source file 'restaurant_software.cpp')
+  
   restaurant_software.vcxproj -> C:\stefan\restaurant_software\restaurant_software\x64\Debug\restaurant_software.exe

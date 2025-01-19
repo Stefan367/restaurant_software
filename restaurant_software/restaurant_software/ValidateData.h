@@ -25,9 +25,9 @@ using namespace std;
 
 bool isIntPositive(const int n)
 {
-	if (n < 0)
+	if (n <= 0)
 	{
-		cout << "Numbers cannot be negative";
+		cout << "Numbers cannot be negative." << endl;
 		return false;
 	}
 	return true;
@@ -117,6 +117,33 @@ string getValidStringFromConsole(const string& prompt)
 	}
 
 	return input;
+}
+
+// Validate int input from the console
+int getValidIntigerFromConsole(const string& prompt)
+{
+	int quantity;
+
+	while (true)
+	{
+		cout << prompt;
+
+		cin >> quantity;
+
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), NEW_LINE);
+			cout << "Invalid input! Please enter a number." << endl;
+			continue;
+		}
+
+		if (isIntPositive(quantity))
+		{
+			break;
+		}
+	}
+	return quantity;
 }
 
 #endif
