@@ -61,6 +61,11 @@ const string ADD_PRODUCT_TO_STORAGE_MESSAGE = "Enter the product name you want t
 const string PRODUCT_QUANTITY_MESSAGE = "Enter the product quantity: ";
 const string VALIDATE_DATE_MESSAGE = "Enter the date you want daily reports from: ";
 const string REMOVE_ITEM_FROM_MENU_MESSAGE = "Enter the item from the menu you want to delete: ";
+const string ADD_NAME_OF_MENU_ITEM = "Enter the name of the new menu item: ";
+const string ADD_NUMBER_OF_INGRIDIENTS_OF_MENU_ITEM = "Enter the number of ingredients: ";
+const string ADD_INGRIDIENT_NAME_OF_MENU_ITEM = "Enter the ingridient name: ";
+const string ADD_INGRIDIENT_QUANTITY_OF_MENU_ITEM = "Enter the ingridient quantity: ";
+const string ADD_PRICE_OF_MENU_ITEM = "Enter the price of the new menu item: ";
 
 
 #endif

@@ -1,2 +1,3 @@
 Shopska salad;tomatoes-100,cucumbers-150,cheese-50,onion-50;10.500000
 Pizza Pepperone;dough-200,tomatoes-100,pepperone-100,cheese-50;13.990000
+Pasta Bolognese;tomatoes-100,dough-200,meat-100,cheese-50;15.990000

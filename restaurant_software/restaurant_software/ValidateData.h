@@ -156,6 +156,32 @@ int getValidIntigerFromConsole(const string& prompt)
 	return quantity;
 }
 
+double getValidDoubleFromConsole(const string& prompt)
+{
+	double input;
+
+	while (true)
+	{
+		cout << prompt;
+
+		cin >> input;
+
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), NEW_LINE);
+			cout << "Invalid input! Please enter a number." << endl;
+			continue;
+		}
+
+		if (isDoublePositive(input))
+		{
+			break;
+		}
+	}
+	return input;
+}
+
 string getValidDateFromConsole(const string& prompt)
 {
 	string input;

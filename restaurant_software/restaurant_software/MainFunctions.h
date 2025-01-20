@@ -565,6 +565,59 @@ void showDailyReportsFromGivenDateToToday(const string& date)
     }
 }
 
+// Add new item in the menu
+bool getValidDataForMenuItem(string& itemName, vector<Ingridients>& ingredients, double& price)
+{
+    itemName = getValidStringFromConsole(ADD_NAME_OF_MENU_ITEM);
+
+    // Check if the item already exists
+    if (doesMenuHasGivenMeal(itemName))
+    {
+        cout << "Item " << itemName << " already exists in the menu." << endl;
+        return false;
+    }
+
+    // Input number of ingredients
+    int numIngridients = getValidIntigerFromConsole(ADD_NUMBER_OF_INGRIDIENTS_OF_MENU_ITEM);
+    for (int i = 1; i <= numIngridients; ++i)
+    {
+        Ingridients ing;
+        cout << i << ". ";
+        ing.name = getValidStringFromConsole(ADD_INGRIDIENT_NAME_OF_MENU_ITEM);
+
+        cout << i << ". ";
+        ing.quantity = getValidIntigerFromConsole(ADD_INGRIDIENT_QUANTITY_OF_MENU_ITEM);
+
+        ingredients.push_back(ing);
+    }
+
+    // Input price
+    price = getValidDoubleFromConsole(ADD_PRICE_OF_MENU_ITEM);
+
+    return true;
+}
+
+void addMenuItem() {
+    string itemName;
+    vector<Ingridients> ingredients;
+    double price = 0.0;
+
+    if (!getValidDataForMenuItem(itemName, ingredients, price)) return;
+
+    if (!isNameValid(itemName)) return;
+
+    if (ingredients.empty())
+    {
+        cout << "The menu item must have at least one ingredient." << endl;
+        return;
+    }
+
+    if (!isDoublePositive(price)) return;
+
+    menu.push_back({ itemName, ingredients, price });
+    cout << itemName << " was successfully added to the menu." << endl;
+}
+
 // Remove item from the menu
 void removeItemFromMenu(const string& mealName)
 {

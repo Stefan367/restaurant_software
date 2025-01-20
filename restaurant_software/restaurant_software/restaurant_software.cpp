@@ -111,6 +111,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 12:
+		addMenuItem();
 		break;
 
 	case 13:
