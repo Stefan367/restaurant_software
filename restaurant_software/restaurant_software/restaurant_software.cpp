@@ -1,8 +1,16 @@
-// restaurant_software.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-// proekt_restorant_beta.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/*
+* Solution to course project #1
+* Introduction to programming course
+* Faculty of Mathematics And Informatics of Sofia University
+* Winter semester 2024/2025
+*
+* @author Stefan Ivanov
+* @idnumber 2MI0600509
+* @compiler VCC
+*
+* The main function of the project. Here is where all functions are called and make the program work.
+*
+*/
 
 #include <iostream>
 #include <string>
