@@ -467,21 +467,28 @@ void viewWhatHadLeftInTheStorage()
 }
 
 // Remove a given product from storage
-void removeProductFromStorage(const string& productName)
+void removeProductFromStorage()
 {
+    string storageProductName;
+
+    while (storageProductName.empty())
+    {
+        storageProductName = getValidStringFromConsole(REMOVE_PRODUCT_FROM_STORAGE_MESSAGE);
+    }
+
     if (!indicateIfStorageIsEmpty()) return;
 
     for (size_t i = 0; i < storage.size(); ++i)
     {
-        if (storage[i].product == productName)
+        if (storage[i].product == storageProductName)
         {
             storage.erase(storage.begin() + i);
-            cout << "Product " << productName << " removed from storage." << endl;
+            cout << "Product " << storageProductName << " removed from storage." << endl;
             return;
         }
     }
 
-    cout << "Product " << productName << " not found in storage." << endl;
+    cout << "Product " << storageProductName << " not found in storage." << endl;
 }
 
 // Add product to storage or increase quantity if it already exists

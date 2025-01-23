@@ -56,8 +56,8 @@ const int MONTH_STRING_LENGTH = 2;
 const int YEAR_STRING_LENGTH = 4;
 
 const string MAKE_AN_ORDER_MESSAGE = "What would you like to order: ";
-const string REMOVE_PRODUCT_FROM_STORAGE_MESSAGE = "Enter the product name you want to remove: ";
-const string ADD_PRODUCT_TO_STORAGE_MESSAGE = "Enter the product name you want to add: ";
+const string REMOVE_PRODUCT_FROM_STORAGE_MESSAGE = "Enter the name of the product you want to remove: ";
+const string ADD_PRODUCT_TO_STORAGE_MESSAGE = "Enter the name of the product you want to add: ";
 const string PRODUCT_QUANTITY_MESSAGE = "Enter the product quantity: ";
 const string VALIDATE_DATE_MESSAGE = "Enter the date you want daily reports from: ";
 const string REMOVE_ITEM_FROM_MENU_MESSAGE = "Enter the item from the menu you want to delete: ";

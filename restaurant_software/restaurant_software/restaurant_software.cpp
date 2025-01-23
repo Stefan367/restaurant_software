@@ -69,13 +69,7 @@ void completeOption(unsigned int choice)
 
 	case 8:
 		viewWhatHadLeftInTheStorage();
-		while (storageProduct.empty())
-		{
-			storageProduct = getValidStringFromConsole(REMOVE_PRODUCT_FROM_STORAGE_MESSAGE);
-		}
-		removeProductFromStorage(storageProduct);
-
-		giveStringDefaultValue(storageProduct);
+		removeProductFromStorage();
 		break;
 
 	case 9:
