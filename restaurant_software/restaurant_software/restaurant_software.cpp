@@ -23,7 +23,6 @@ using namespace std;
 
 void completeOption(unsigned int choice)
 {
-	string order;
 	string storageProduct;
 	string date;
 	string mealName;
@@ -36,13 +35,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 2:
-		while (order.empty())
-		{
-			order = getValidStringFromConsole(MAKE_AN_ORDER_MESSAGE);
-		}
-		orderFoodFromTheMenu(order);
-
-		giveStringDefaultValue(order);
+		orderFoodFromTheMenu();
 		break;
 
 	case 3:

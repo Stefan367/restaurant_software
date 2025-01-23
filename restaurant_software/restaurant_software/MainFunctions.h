@@ -288,23 +288,28 @@ void printMenu()
 }
 
 // Order something from the menu
-void orderFoodFromTheMenu(const string& orderedMeal)
+void orderFoodFromTheMenu()
 {
-    if (!isNameValid(orderedMeal)) return;
-
-    if (!doesMenuHasGivenMeal(orderedMeal))
+    string order;
+    while (order.empty())
     {
-        cout << "There is not " << orderedMeal << " in the menu." << endl;
+        order = getValidStringFromConsole(MAKE_AN_ORDER_MESSAGE);
+    }
+    if (!isNameValid(order)) return;
+
+    if (!doesMenuHasGivenMeal(order))
+    {
+        cout << "There is not " << order << " in the menu." << endl;
         return;
     }
 
-    FoodItem order = takeAMealFromTheMenu(orderedMeal);
-    if (!prepareMeal(order))
+    FoodItem orderedMeal = takeAMealFromTheMenu(order);
+    if (!prepareMeal(orderedMeal))
     {
         return;
     }
-    addNewOrderToAllOrders(order.name);
-    updateDailyReport(order.price);
+    addNewOrderToAllOrders(orderedMeal.name);
+    updateDailyReport(orderedMeal.price);
 
 }
 

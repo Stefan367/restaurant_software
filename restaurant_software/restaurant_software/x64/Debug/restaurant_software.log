@@ -1,8 +1,8 @@
 ﻿  restaurant_software.cpp
-C:\stefan\restaurant_software\restaurant_software\restaurant_software\MainFunctions.h(487,9): warning C4551: function call missing argument list
+C:\stefan\restaurant_software\restaurant_software\restaurant_software\MainFunctions.h(492,9): warning C4551: function call missing argument list
   (compiling source file 'restaurant_software.cpp')
   
-C:\stefan\restaurant_software\restaurant_software\restaurant_software\MainFunctions.h(538,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\stefan\restaurant_software\restaurant_software\restaurant_software\MainFunctions.h(543,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'restaurant_software.cpp')
   
   restaurant_software.vcxproj -> C:\stefan\restaurant_software\restaurant_software\x64\Debug\restaurant_software.exe
