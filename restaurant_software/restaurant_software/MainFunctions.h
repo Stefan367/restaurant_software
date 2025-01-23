@@ -80,6 +80,22 @@ bool indicateIfMenuIsEmpty()
     return true;
 }
 
+void giveValueToString(string& str, const string& prompt)
+{
+    while (str.empty())
+    {
+        str = getValidStringFromConsole(prompt);
+    }
+}
+
+void giveValueToInt(int& number, const string& prompt)
+{
+    while (number <= 0)
+    {
+        number = getValidIntigerFromConsole(prompt);
+    }
+}
+
 void startNewWorkingDay()
 {
     DailyReport currentWorkingDay = dailyReports.back();
@@ -291,10 +307,9 @@ void printMenu()
 void orderFoodFromTheMenu()
 {
     string order;
-    while (order.empty())
-    {
-        order = getValidStringFromConsole(MAKE_AN_ORDER_MESSAGE);
-    }
+
+    giveValueToString(order, MAKE_AN_ORDER_MESSAGE);
+    
     if (!isNameValid(order)) return;
 
     if (!doesMenuHasGivenMeal(order))
@@ -471,10 +486,7 @@ void removeProductFromStorage()
 {
     string storageProductName;
 
-    while (storageProductName.empty())
-    {
-        storageProductName = getValidStringFromConsole(REMOVE_PRODUCT_FROM_STORAGE_MESSAGE);
-    }
+    giveValueToString(storageProductName, REMOVE_PRODUCT_FROM_STORAGE_MESSAGE);
 
     if (!indicateIfStorageIsEmpty()) return;
 
@@ -492,11 +504,18 @@ void removeProductFromStorage()
 }
 
 // Add product to storage or increase quantity if it already exists
-void addProductInStorage(const string& productName, int& quantity)
+void addProductInStorage()
 {
-    if (!isNameValid(productName)) return;
+    string storageProduct;
+    int quantity = 0;
 
-    if (!isIntPositive)
+    giveValueToString(storageProduct, ADD_PRODUCT_TO_STORAGE_MESSAGE);
+    giveValueToInt(quantity, PRODUCT_QUANTITY_MESSAGE);
+    
+
+    if (!isNameValid(storageProduct)) return;
+
+    if (!isIntPositive(quantity))
     {
         cout << "Quantity must be greater than 0." << endl;
         return;
@@ -505,18 +524,18 @@ void addProductInStorage(const string& productName, int& quantity)
     // Check if the product already exists in the storage
     for (auto& item : storage)
     {
-        if (item.product == productName)
+        if (item.product == storageProduct)
         {
             item.availableQuantity += quantity;
-            cout << "Increased quantity of " << productName << " by " << quantity
+            cout << "Increased quantity of " << storageProduct << " by " << quantity
                 << " g. Total: " << item.availableQuantity << " g." << endl;
             return;
         }
     }
 
     // If the product does not exist, add it as a new entry
-    storage.push_back({ productName, quantity });
-    cout << "New product added in storage: " << productName << " with quantity: "
+    storage.push_back({ storageProduct, quantity });
+    cout << "New product added in storage: " << storageProduct << " with quantity: "
         << quantity << " g." << endl;
 }
 

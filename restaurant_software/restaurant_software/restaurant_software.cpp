@@ -76,15 +76,8 @@ void completeOption(unsigned int choice)
 
 		viewWhatHadLeftInTheStorage();
 
-		while (storageProduct.empty())
-		{
-			storageProduct = getValidStringFromConsole(ADD_PRODUCT_TO_STORAGE_MESSAGE);
-		}
-		while (quantity <= 0)
-		{
-			quantity = getValidIntigerFromConsole(PRODUCT_QUANTITY_MESSAGE);
-		}
-		addProductInStorage(storageProduct, quantity);
+		
+		addProductInStorage();
 
 		giveStringDefaultValue(storageProduct);
 		giveIntDefaultValue(quantity);
