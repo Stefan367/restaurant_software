@@ -140,7 +140,7 @@ int getValidIntigerFromConsole(const string& prompt)
 
 		cin >> quantity;
 
-		if (cin.fail())
+		if (cin.fail() || cin.peek() != NEW_LINE)
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), NEW_LINE);
@@ -166,7 +166,7 @@ double getValidDoubleFromConsole(const string& prompt)
 
 		cin >> input;
 
-		if (cin.fail())
+		if (cin.fail() || cin.peek() != NEW_LINE)
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), NEW_LINE);

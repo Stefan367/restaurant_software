@@ -23,11 +23,6 @@ using namespace std;
 
 void completeOption(unsigned int choice)
 {
-	string storageProduct;
-	string date;
-	string mealName;
-	int quantity = 0;
-
 	switch (choice)
 	{
 	case 1:
@@ -73,14 +68,8 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 9:
-
 		viewWhatHadLeftInTheStorage();
-
-		
 		addProductInStorage();
-
-		giveStringDefaultValue(storageProduct);
-		giveIntDefaultValue(quantity);
 		break;
 
 	case 10:
@@ -88,14 +77,7 @@ void completeOption(unsigned int choice)
 		break;
 
 	case 11:
-
-		while (date.empty())
-		{
-			date = getValidDateFromConsole(VALIDATE_DATE_MESSAGE);
-		}
-		showDailyReportsFromGivenDateToToday(date);
-
-		giveStringDefaultValue(date);
+		showDailyReportsFromGivenDateToToday();
 		break;
 
 	case 12:
@@ -106,13 +88,7 @@ void completeOption(unsigned int choice)
 		if (!indicateIfMenuIsEmpty()) break;
 
 		printMenu();
-		while (mealName.empty())
-		{
-			mealName = getValidStringFromConsole(REMOVE_ITEM_FROM_MENU_MESSAGE);
-		}
-		removeItemFromMenu(mealName);
-
-		giveStringDefaultValue(mealName);
+		removeItemFromMenu();
 		break;
 
 	case 14:

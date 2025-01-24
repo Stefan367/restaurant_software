@@ -1,5 +1,5 @@
 ﻿  restaurant_software.cpp
-C:\stefan\restaurant_software\restaurant_software\restaurant_software\MainFunctions.h(569,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\stefan\restaurant_software\restaurant_software\restaurant_software\MainFunctions.h(546,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'restaurant_software.cpp')
   
   restaurant_software.vcxproj -> C:\stefan\restaurant_software\restaurant_software\x64\Debug\restaurant_software.exe

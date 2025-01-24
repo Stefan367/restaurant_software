@@ -80,22 +80,6 @@ bool indicateIfMenuIsEmpty()
     return true;
 }
 
-void giveValueToString(string& str, const string& prompt)
-{
-    while (str.empty())
-    {
-        str = getValidStringFromConsole(prompt);
-    }
-}
-
-void giveValueToInt(int& number, const string& prompt)
-{
-    while (number <= 0)
-    {
-        number = getValidIntigerFromConsole(prompt);
-    }
-}
-
 void startNewWorkingDay()
 {
     DailyReport currentWorkingDay = dailyReports.back();
@@ -306,9 +290,7 @@ void printMenu()
 // Order something from the menu
 void orderFoodFromTheMenu()
 {
-    string order;
-
-    giveValueToString(order, MAKE_AN_ORDER_MESSAGE);
+    const string order = getValidStringFromConsole(MAKE_AN_ORDER_MESSAGE);
     
     if (!isNameValid(order)) return;
 
@@ -484,9 +466,7 @@ void viewWhatHadLeftInTheStorage()
 // Remove a given product from storage
 void removeProductFromStorage()
 {
-    string storageProductName;
-
-    giveValueToString(storageProductName, REMOVE_PRODUCT_FROM_STORAGE_MESSAGE);
+    const string storageProductName = getValidStringFromConsole(REMOVE_PRODUCT_FROM_STORAGE_MESSAGE);
 
     if (!indicateIfStorageIsEmpty()) return;
 
@@ -506,11 +486,8 @@ void removeProductFromStorage()
 // Add product to storage or increase quantity if it already exists
 void addProductInStorage()
 {
-    string storageProduct;
-    int quantity = 0;
-
-    giveValueToString(storageProduct, ADD_PRODUCT_TO_STORAGE_MESSAGE);
-    giveValueToInt(quantity, PRODUCT_QUANTITY_MESSAGE);
+    const string storageProduct = getValidStringFromConsole(ADD_PRODUCT_TO_STORAGE_MESSAGE);
+    const int quantity = getValidIntigerFromConsole(PRODUCT_QUANTITY_MESSAGE);
     
 
     if (!isNameValid(storageProduct)) return;
@@ -572,8 +549,10 @@ int getIndexOfTheFirstDailyReportWithDate(const string& date)
     return 0;
 }
 
-void showDailyReportsFromGivenDateToToday(const string& date)
+void showDailyReportsFromGivenDateToToday()
 {
+    const string date = getValidDateFromConsole(VALIDATE_DATE_MESSAGE);
+
     if (!isValidDate(date))
     {
         cout << "Invalid date: " << date << endl;
@@ -650,8 +629,10 @@ void addMenuItem() {
 }
 
 // Remove item from the menu
-void removeItemFromMenu(const string& mealName)
+void removeItemFromMenu()
 {
+    const string mealName = getValidStringFromConsole(REMOVE_ITEM_FROM_MENU_MESSAGE);
+
     if (!isNameValid(mealName)) return;
 
     if (!indicateIfMenuIsEmpty()) return;

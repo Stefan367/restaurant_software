@@ -1,4 +1,4 @@
-tomatoes-9800
-cucumbers-9850
-cheese-4900
-onion-5000
+tomatoes-9600
+cucumbers-9550
+cheese-4800
+onion-4900
