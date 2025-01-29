@@ -305,4 +305,9 @@ void giveDoubleDefaultValue(double& floatingNumber)
 	floatingNumber = 0.0;
 }
 
+void printNewLine()
+{
+	cout << endl;
+}
+
 #endif

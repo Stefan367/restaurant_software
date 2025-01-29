@@ -242,7 +242,7 @@ bool doesStorageContainsProductForMeal(Ingridients ingridient)
             else
             {
                 cout << "Not enough quantity of " << currProduct.product
-                    << " (available: " << currProduct.availableQuantity << " g)";
+                    << " (available: " << currProduct.availableQuantity << " g)" << endl;
                 return false;
             }
         }
@@ -267,6 +267,7 @@ bool prepareMeal(FoodItem& meal)
     vector<Ingridients> currProductIngridients = meal.ingridients;
     bool canPrepare = true;
 
+    printNewLine();
     // Check if all ingredients are available in the storage
     for (const auto& currIngridient : currProductIngridients)
     {
@@ -297,6 +298,7 @@ void orderFoodFromTheMenu()
 
     if (!doesMenuHasGivenMeal(order))
     {
+        printNewLine();
         cout << "There is not " << order << " in the menu." << endl;
         return;
     }
@@ -330,6 +332,7 @@ void cancelLastOrder()
     FoodItem meal = takeAMealFromTheMenu(lastOrder);
     if (isFoodItemEmpty(meal))
     {
+        printNewLine();
         cout << "Error: Meal not found in the menu!" << endl;
         return;
     }
@@ -356,6 +359,8 @@ void viewAllOrders()
         cout << "There are no previous orders." << endl;
         return;
     }
+    cout << endl << "All previous orders are:" << endl;
+
     Order currOrder;
     for (size_t i = 0; i < orders.size(); i++)
     {
@@ -401,6 +406,8 @@ void viewMealsSortedAndWithCounts()
         return;
     }
 
+    printNewLine();
+    cout << "Alphabetically sorted orders:" << endl;
     vector<Order> sortedOrders = getSortedOrders(orders);
 
     // Iterate through the sorted orders and count each meal
@@ -443,6 +450,7 @@ void showTodaysDailyReport()
 
     const DailyReport todaysDailyReport = dailyReports.back();
 
+    printNewLine();
     cout << "The daily sales for today ("
         << todaysDailyReport.date << ") are "
         << todaysDailyReport.totalAmount << " BGN" << endl;
@@ -456,6 +464,7 @@ void viewWhatHadLeftInTheStorage()
         cout << "There is nothing left in the storage." << endl;
     }
 
+    printNewLine();
     cout << "The storage contains: " << endl;
 
     for (size_t i = 0; i < storage.size(); i++)
@@ -485,6 +494,21 @@ void removeProductFromStorage()
 }
 
 // Add product to storage or increase quantity if it already exists
+bool increaseProductQuantity(const string& storageProduct, const int& quantity)
+{
+    for (auto& item : storage)
+    {
+        if (item.product == storageProduct)
+        {
+            item.availableQuantity += quantity;
+            cout << "Increased quantity of " << storageProduct << " by " << quantity
+                << " g. Total: " << item.availableQuantity << " g." << endl;
+            return true;
+        }
+    }
+    return false;
+}
+
 void addProductInStorage()
 {
     const string storageProduct = getValidStringFromConsole(ADD_PRODUCT_TO_STORAGE_MESSAGE);
@@ -499,16 +523,11 @@ void addProductInStorage()
         return;
     }
 
+    printNewLine();
     // Check if the product already exists in the storage
-    for (auto& item : storage)
+    if (increaseProductQuantity(storageProduct, quantity))
     {
-        if (item.product == storageProduct)
-        {
-            item.availableQuantity += quantity;
-            cout << "Increased quantity of " << storageProduct << " by " << quantity
-                << " g. Total: " << item.availableQuantity << " g." << endl;
-            return;
-        }
+        return;
     }
 
     // If the product does not exist, add it as a new entry
@@ -520,6 +539,8 @@ void addProductInStorage()
 // Make a daily report
 void makeDailyReport()
 {
+    printNewLine();
+
     if (areThereNoDailyReports())
     {
         cout << "There are no daily reports." << endl;
@@ -527,7 +548,8 @@ void makeDailyReport()
     }
 
     // Show the daily report for today
-    DailyReport todaysDailyReport = dailyReports.back();
+    const DailyReport todaysDailyReport = dailyReports.back();
+
     cout << "The daily report for today is: " << todaysDailyReport.date << " -> "
         << todaysDailyReport.totalAmount << " BGN" << endl;
 
@@ -553,6 +575,7 @@ int getIndexOfTheFirstDailyReportWithDate(const string& date)
 void showDailyReportsFromGivenDateToToday()
 {
     const string date = getValidDateFromConsole(VALIDATE_DATE_MESSAGE);
+    printNewLine();
 
     if (!isValidDate(date))
     {
@@ -608,7 +631,8 @@ bool getValidDataForMenuItem(string& itemName, vector<Ingridients>& ingredients,
     return true;
 }
 
-void addMenuItem() {
+void addMenuItem()
+{
     string itemName;
     vector<Ingridients> ingredients;
     double price = 0.0;
@@ -617,6 +641,7 @@ void addMenuItem() {
 
     if (!isNameValid(itemName)) return;
 
+    printNewLine();
     if (ingredients.empty())
     {
         cout << "The menu item must have at least one ingredient." << endl;
@@ -637,6 +662,8 @@ void removeItemFromMenu()
     if (!isNameValid(mealName)) return;
 
     if (!indicateIfMenuIsEmpty()) return;
+
+    printNewLine();
 
     for (size_t i = 0; i < menu.size(); ++i)
     {

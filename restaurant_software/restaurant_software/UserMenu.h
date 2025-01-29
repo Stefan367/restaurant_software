@@ -88,7 +88,7 @@ void visualizeOptions()
 {
 	if (userRole || !userRole)
 	{
-		cout << "1. View menu." << endl;
+		cout << endl << "1. View menu." << endl;
 		cout << "2. Create an order." << endl;
 		cout << "3. Cancel order." << endl;
 		cout << "4. View previous orders." << endl;
