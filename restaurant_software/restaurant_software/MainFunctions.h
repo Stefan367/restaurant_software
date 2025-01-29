@@ -31,7 +31,7 @@ bool isFoodItemEmpty(const FoodItem& meal)
 
 bool isIngridientItemEmpty(const Ingridients& ing)
 {
-    return ing.name.empty();
+    return ing.name.empty() || !ing.quantity;
 }
 
 bool isStorageItemEmpty(const Storage& item)
@@ -106,6 +106,90 @@ string getTodaysDate()
     return today;
 }
 
+// Take a meal from the menu if it exist
+FoodItem takeAMealFromTheMenu(const string& meal)
+{
+    if (!isNameValid(meal)) return { "", {}, 0.0 };
+
+    FoodItem currMeal;
+    for (size_t i = 0; i < menu.size(); i++)
+    {
+        currMeal = menu[i];
+        if (meal == currMeal.name)
+        {
+            break;
+        }
+    }
+    return currMeal;
+}
+
+// Add the quantity of ingridients if an order is canceled
+void addUnusedIngridientsInStorage(FoodItem& meal)
+{
+    for (const auto& ingridient : meal.ingridients)
+    {
+        for (auto& product : storage)
+        {
+            if (product.product == ingridient.name)
+            {
+                product.availableQuantity += ingridient.quantity;
+                cout << "Restocked " << ingridient.quantity << " g of " << product.product
+                    << " (new total: " << product.availableQuantity << " g)." << std::endl;
+            }
+        }
+    }
+}
+
+// Substract the quantity of ingridients if an order is made
+void substractUnusedIngridientsInStorage(FoodItem& meal)
+{
+    for (const auto& currIngridient : meal.ingridients)
+    {
+        for (auto& currProductToUse : storage)
+        {
+            if (currIngridient.name == currProductToUse.product)
+            {
+                currProductToUse.availableQuantity -= currIngridient.quantity;
+            }
+        }
+    }
+}
+
+void updateDailyReport(const double mealPrice)
+{
+    if (areThereNoDailyReports())
+    {
+        cout << "Warning: No daily report available to update the total amount." << endl;
+        return;
+    }
+    dailyReports.back().totalAmount += mealPrice;
+}
+
+
+// MAIN FUNCTIONS IN THE APP
+
+// Function to print the menu
+void printMenu()
+{
+    if (!indicateIfMenuIsEmpty()) return;
+
+    cout << endl << "-------- M E N U --------" << endl;
+
+    for (size_t i = 0; i < menu.size(); ++i)
+    {
+        FoodItem food = menu[i];
+        cout << "Food: " << food.name << "\nIngredients:\n";
+
+        for (size_t j = 0; j < food.ingridients.size(); ++j)
+        {
+            cout << "  - " << food.ingridients[j].name << ": " << food.ingridients[j].quantity << "g\n";
+        }
+        cout << "Price: " << food.price << " BGN\n" << endl;
+    }
+}
+
+// Order something from the menu
+
 void addNewOrderToAllOrders(const string& orderedMeal)
 {
     if (!isNameValid(orderedMeal)) return;
@@ -134,23 +218,6 @@ bool doesMenuHasGivenMeal(const string& meal)
         }
     }
     return false;
-}
-
-// Take a meal from the menu if it exist
-FoodItem takeAMealFromTheMenu(const string& meal)
-{
-    if (!isNameValid(meal)) return { "", {}, 0.0 };
-
-    FoodItem currMeal;
-    for (size_t i = 0; i < menu.size(); i++)
-    {
-        currMeal = menu[i];
-        if (meal == currMeal.name)
-        {
-            break;
-        }
-    }
-    return currMeal;
 }
 
 // Check if storage contains a certain product to prepare a meal
@@ -188,38 +255,6 @@ bool doesStorageContainsProductForMeal(Ingridients ingridient)
     return false;
 }
 
-// Add the quantity of ingridients if an order is canceled
-void addUnusedIngridientsInStorage(FoodItem& meal)
-{
-    for (const auto& ingridient : meal.ingridients)
-    {
-        for (auto& product : storage)
-        {
-            if (product.product == ingridient.name)
-            {
-                product.availableQuantity += ingridient.quantity;
-                cout << "Restocked " << ingridient.quantity << " g of " << product.product
-                    << " (new total: " << product.availableQuantity << " g)." << std::endl;
-            }
-        }
-    }
-}
-
-// Substract the quantity of ingridients if an order is made
-void substractUnusedIngridientsInStorage(FoodItem& meal)
-{
-    for (const auto& currIngridient : meal.ingridients)
-    {
-        for (auto& currProductToUse : storage)
-        {
-            if (currIngridient.name == currProductToUse.product)
-            {
-                currProductToUse.availableQuantity -= currIngridient.quantity;
-            }
-        }
-    }
-}
-
 // Remove the needed quantity of each product to prepare a meal
 bool prepareMeal(FoodItem& meal)
 {
@@ -254,40 +289,6 @@ bool prepareMeal(FoodItem& meal)
     return true;
 }
 
-void updateDailyReport(const double mealPrice)
-{
-    if (areThereNoDailyReports())
-    {
-        cout << "Warning: No daily report available to update the total amount." << endl;
-        return;
-    }
-    dailyReports.back().totalAmount += mealPrice;
-}
-
-
-// MAIN FUNCTIONS IN THE APP
-
-// Function to print the menu
-void printMenu()
-{
-    if (!indicateIfMenuIsEmpty()) return;
-
-    cout << endl << "-------- M E N U --------" << endl;
-
-    for (size_t i = 0; i < menu.size(); ++i)
-    {
-        FoodItem food = menu[i];
-        cout << "Food: " << food.name << "\nIngredients:\n";
-
-        for (size_t j = 0; j < food.ingridients.size(); ++j)
-        {
-            cout << "  - " << food.ingridients[j].name << ": " << food.ingridients[j].quantity << "g\n";
-        }
-        cout << "Price: " << food.price << " BGN\n" << endl;
-    }
-}
-
-// Order something from the menu
 void orderFoodFromTheMenu()
 {
     const string order = getValidStringFromConsole(MAKE_AN_ORDER_MESSAGE);

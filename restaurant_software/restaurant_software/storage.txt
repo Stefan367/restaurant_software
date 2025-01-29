@@ -2,3 +2,11 @@ tomatoes-9600
 cucumbers-9550
 cheese-4800
 onion-4900
+bread-5000
+chicken-5000
+iceberg-5000
+caesar souce-50
+chocolate-3000
+sugar-6000
+flour-5000
+eggs-3000

@@ -1,3 +1,5 @@
 Shopska salad;tomatoes-100,cucumbers-150,cheese-50,onion-50;10.500000
 Pizza Pepperone;dough-200,tomatoes-100,pepperone-100,cheese-50;13.990000
 Pasta Bolognese;tomatoes-100,dough-200,meat-100,cheese-50;15.990000
+Caesar salad;iceberg-200,chicken-150,bread-50,caesar souce-50;13.990000
+Souffle;chocolate-50,sugar-50,eggs-20,flour-70;8.990000
