@@ -1,15 +1,15 @@
-tomatoes-8100
-cucumbers-8500
-cheese-4050
-onion-4550
-bread-4850
-chicken-4550
-iceberg-4400
-caesar souce-100
-chocolate-2750
-sugar-5750
-flour-4650
-eggs-2900
-dough-3400
-meat-4700
-pepperone-2500
+tomatoes-7400
+cucumbers-8200
+cheese-3700
+onion-4450
+bread-4800
+chicken-4400
+iceberg-4200
+caesar souce-50
+chocolate-2650
+sugar-5650
+flour-4510
+eggs-2860
+dough-2400
+meat-4400
+pepperone-2300

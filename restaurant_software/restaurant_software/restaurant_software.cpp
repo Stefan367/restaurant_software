@@ -23,31 +23,31 @@ void completeOption(unsigned int choice)
 {
 	switch (choice)
 	{
-	case 1:
+	case CHOICE_1_SHOW_MENU:
 		printMenu();
 		break;
 
-	case 2:
+	case CHOICE_2_MAKE_ORDER:
 		orderFoodFromTheMenu();
 		break;
 
-	case 3:
+	case CHOICE_3_CANCEL_ORDER:
 		cancelLastOrder();
 		break;
 
-	case 4:
+	case CHOICE_4_PREVIOUS_ORDERS:
 		viewAllOrders();
 		break;
 
-	case 5:
+	case CHOICE_5_SORTED_ORDER:
 		viewMealsSortedAndWithCounts();
 		break;
 
-	case 6:
+	case CHOICE_6_DAILY_SALES:
 		showTodaysDailyReport();
 		break;
 
-	case 7:
+	case CHOICE_7_CLOSE_OR_STORAGE:
 		if (!userRole)
 		{
 			startNewWorkingDay();
@@ -60,36 +60,36 @@ void completeOption(unsigned int choice)
 		}
 		break;
 
-	case 8:
+	case CHOICE_8_REMOVE_PRODUCT:
 		viewWhatHadLeftInTheStorage();
 		removeProductFromStorage();
 		break;
 
-	case 9:
+	case CHOICE_9_ADD_PRODUCT:
 		viewWhatHadLeftInTheStorage();
 		addProductInStorage();
 		break;
 
-	case 10:
+	case CHOICE_10_MAKE_REPORT:
 		makeDailyReport();
 		break;
 
-	case 11:
+	case CHOICE_11_REPORTS_FROM_DATE:
 		showDailyReportsFromGivenDateToToday();
 		break;
 
-	case 12:
+	case CHOICE_12_ADD_MENU_ITEM:
 		addMenuItem();
 		break;
 
-	case 13:
+	case CHOICE_13_REMOVE_MENU_ITEM:
 		if (!indicateIfMenuIsEmpty()) break;
 
 		printMenu();
 		removeItemFromMenu();
 		break;
 
-	case 14:
+	case CHOICE_14_CLOSE_APP:
 		startNewWorkingDay();
 		saveDataToAllFiles();
 		exit(0);

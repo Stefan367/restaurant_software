@@ -27,6 +27,21 @@ const int VALID_CHOICES_MANAGER[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
 const unsigned int NUMBER_OF_VALID_CHOICES_FOR_MANAGER = 14;
 unsigned int currentChoice = 0;
 
+const int CHOICE_1_SHOW_MENU = 1;
+const int CHOICE_2_MAKE_ORDER = 2;
+const int CHOICE_3_CANCEL_ORDER = 3;
+const int CHOICE_4_PREVIOUS_ORDERS = 4;
+const int CHOICE_5_SORTED_ORDER = 5;
+const int CHOICE_6_DAILY_SALES = 6;
+const int CHOICE_7_CLOSE_OR_STORAGE = 7;
+const int CHOICE_8_REMOVE_PRODUCT = 8;
+const int CHOICE_9_ADD_PRODUCT = 9;
+const int CHOICE_10_MAKE_REPORT = 10;
+const int CHOICE_11_REPORTS_FROM_DATE = 11;
+const int CHOICE_12_ADD_MENU_ITEM = 12;
+const int CHOICE_13_REMOVE_MENU_ITEM = 13;
+const int CHOICE_14_CLOSE_APP = 14;
+
 const int MENU_FILE_NUMBER = 1;
 const int STORAGE_FILE_NUMBER = 2;
 const int ORDERS_FILE_NUMBER = 3;
